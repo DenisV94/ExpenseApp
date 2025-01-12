@@ -7,11 +7,6 @@ plugins {
     alias(libs.plugins.sqlDelight) apply false
 }
 
-repositories {
-    google()
-    mavenCentral()
-}
-
 buildscript {
     dependencies {
         classpath(libs.resources.generator)

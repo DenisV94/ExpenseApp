@@ -55,6 +55,10 @@ kotlin {
             api(libs.resources)
             api(libs.resources.compose)
 
+            // Moko media
+            api(libs.media)
+            api(libs.media.compose)
+
             // Arrow
             implementation(libs.arrow.core)
             implementation(libs.arrow.fx.coroutines)
