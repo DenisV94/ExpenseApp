@@ -28,6 +28,20 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
+            export(libs.resources)
+            export("dev.icerock.moko:resources:0.24.4")
+        }
+    }
+
+    // Remove Beta warning at compile
+    targets.configureEach {
+        compilations.configureEach {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                }
+            }
         }
     }
     
@@ -66,7 +80,6 @@ kotlin {
             // Navigator
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.transitions)
-
         }
         androidMain.dependencies {
             implementation(compose.preview)
@@ -94,6 +107,8 @@ sqldelight {
 android {
     namespace = "org.denis.expenseapp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+
 
     defaultConfig {
         applicationId = "org.denis.expenseapp"
