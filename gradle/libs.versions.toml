@@ -19,6 +19,7 @@ koinAndroidxCompose = "4.0.1"
 sqldelight = "2.0.2"
 voyager = "1.1.0-beta03"
 moko-resources = "0.24.4"
+arrowFxCoroutines = "2.0.0"
 
 
 [libraries]
@@ -55,6 +56,10 @@ resources-generator = { module = "dev.icerock.moko:resources-generator", version
 # Voyager
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+
+# Arrow
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowFxCoroutines" }
+arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrowFxCoroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

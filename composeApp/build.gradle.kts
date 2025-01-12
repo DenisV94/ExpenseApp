@@ -51,9 +51,13 @@ kotlin {
             // SQLDelight
             implementation(libs.sqldelight.runtime)
 
-            //Moko Resources
+            // Moko Resources
             api(libs.resources)
             api(libs.resources.compose)
+
+            // Arrow
+            implementation(libs.arrow.core)
+            implementation(libs.arrow.fx.coroutines)
 
             // Navigator
             implementation(libs.voyager.navigator)
