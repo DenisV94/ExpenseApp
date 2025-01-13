@@ -80,7 +80,10 @@ kotlin {
             // Navigator
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.transitions)
+            implementation(libs.voyager.tab.navigator)
+            implementation(libs.voyager.bottom.sheet.navigator)
         }
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -135,6 +138,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.activity.ktx)
     debugImplementation(compose.uiTooling)
 }
 

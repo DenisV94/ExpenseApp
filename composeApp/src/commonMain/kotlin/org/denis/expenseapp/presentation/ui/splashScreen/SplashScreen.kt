@@ -11,6 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.denis.expenseapp.MR
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.denis.expenseapp.presentation.common.BodyTextBold
@@ -42,7 +43,7 @@ private fun SplashScreenScreen() {
             verticalArrangement = Arrangement.spacedBy(109.dp)
         ) {
 
-            /* val painter = painterResource(MR.)
+            /*val painter = painterResource(MR.)
             Image(
                 painter = painter,
                 contentDescription = "image",

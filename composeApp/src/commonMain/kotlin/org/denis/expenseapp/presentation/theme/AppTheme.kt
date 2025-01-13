@@ -21,9 +21,9 @@ fun AppTheme(
 ) {
     val darkColorScheme =
         darkColorScheme(
-            primary = Color(0xff2144fa),
+            primary = Color(0xFF6200EE),
             secondary = Color(0xFF03DAC6),
-            background = Color(0xFFF1F1E6)
+            background = Color(0xf1f2f4)
         )
 
     val lightColorScheme =

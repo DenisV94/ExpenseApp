@@ -6,15 +6,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import cafe.adriel.voyager.navigator.Navigator
 import org.denis.expenseapp.presentation.theme.AppTheme
+import org.denis.expenseapp.presentation.ui.homeScreen.HomeTabNavigatorScreen
 import org.denis.expenseapp.presentation.ui.splashScreen.SplashScreen
 
 @Composable
 fun UILauncher() {
-    //Screen nav config
-    ScreenRegistry {
-
-    }
 
     AppTheme {
         var showSplashScreen by remember { mutableStateOf(true) }
@@ -22,8 +20,7 @@ fun UILauncher() {
         if (showSplashScreen) {
             SplashScreen(onTimeout = { showSplashScreen = false })
         } else {
-
-
+            Navigator(HomeTabNavigatorScreen())
         }
     }
 }
