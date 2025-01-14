@@ -1,4 +1,4 @@
-package org.denis.expenseapp.presentation.common
+package org.denis.expenseapp.presentation.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

@@ -46,21 +46,22 @@ koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-view
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinAndroidxCompose" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinAndroidxCompose" }
 
-
+# DateTime
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+
+# Moko Media
 media = { module = "dev.icerock.moko:media", version.ref = "mediaCompose" }
 media-compose = { module = "dev.icerock.moko:media-compose", version.ref = "mediaCompose" }
-
-# SQLDelight
-sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
-sql-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
-sql-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-
 
 # Moko Resources
 resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
 resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }
 resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-resources" }
+
+# SQLDelight
+sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+sql-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+sql-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
 
 # Voyager
 voyager-bottom-sheet-navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }

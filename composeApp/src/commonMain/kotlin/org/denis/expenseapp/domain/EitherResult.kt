@@ -7,4 +7,9 @@ sealed class EitherResult<out T> {
         data object NotFound : RepositoryError()
         data class UnknownError(val message: String) : RepositoryError()
     }
+    sealed class LocalDatabaseError {
+        data object ConnectionError : LocalDatabaseError()
+        data object NotFound : LocalDatabaseError()
+
+    }
 }

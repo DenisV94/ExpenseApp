@@ -1,4 +1,4 @@
-package org.denis.expenseapp.presentation.common
+package org.denis.expenseapp.presentation.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

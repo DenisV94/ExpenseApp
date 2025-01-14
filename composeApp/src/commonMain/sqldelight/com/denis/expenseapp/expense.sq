@@ -1,11 +1,22 @@
-CREATE TABLE hockeyPlayer (
-    player_number INTEGER PRIMARY KEY NOT NULL,
-    full_name TEXT NOT NULL
+CREATE TABLE Expense (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT NOT NULL,
+    amount REAL NOT NULL,
+    date TEXT NOT NULL,
+    category TEXT NOT NULL
 );
 
-insertPlayer:
-INSERT INTO hockeyPlayer (player_number, full_name)
-VALUES (?, ?);
+insertExpense:
+INSERT INTO Expense (description, amount, date, category)
+VALUES (?, ?, ?, ?);
 
-selectAllPlayers:
-SELECT * FROM hockeyPlayer;
+selectAllExpenses:
+SELECT * FROM Expense;
+
+selectExpenseById:
+SELECT * FROM Expense
+WHERE id = ?;
+
+deleteExpenseById:
+DELETE FROM Expense
+WHERE id = ?;

@@ -11,10 +11,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.denis.expenseapp.MR
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.denis.expenseapp.presentation.common.BodyTextBold
+import org.denis.expenseapp.presentation.theme.BodyTextBold
 
 @Composable
 fun SplashScreen(onTimeout: () -> Unit) {
