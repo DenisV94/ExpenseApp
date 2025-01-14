@@ -23,6 +23,7 @@ voyager = "1.1.0-beta03"
 moko-resources = "0.24.4"
 arrowFxCoroutines = "2.0.0"
 activityKtx = "1.9.3"
+coreI18n = "1.0.0-alpha01"
 
 
 [libraries]
@@ -73,6 +74,7 @@ voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", vers
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowFxCoroutines" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrowFxCoroutines" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

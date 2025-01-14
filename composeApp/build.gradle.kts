@@ -53,6 +53,7 @@ kotlin {
 
             // SQLDelight
             implementation(libs.sql.runtime)
+            implementation("app.cash.sqldelight:primitive-adapters:2.0.2")
 
             // Moko Resources
             api(libs.resources)
@@ -120,6 +121,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.core.i18n)
     debugImplementation(compose.uiTooling)
 }
 
@@ -130,7 +132,8 @@ multiplatformResources {
 sqldelight {
     databases {
         create("Database") {
-            packageName.set("com.denis.expenseapp") // Replace with your actual package
+            packageName.set("com.denis.expenseapp")
+
         }
     }
 }

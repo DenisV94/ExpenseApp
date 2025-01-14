@@ -1,4 +1,4 @@
-CREATE TABLE Expense (
+CREATE TABLE expense (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     description TEXT NOT NULL,
     amount REAL NOT NULL,
@@ -7,16 +7,16 @@ CREATE TABLE Expense (
 );
 
 insertExpense:
-INSERT INTO Expense (description, amount, date, category)
+INSERT INTO expense (description, amount, date, category)
 VALUES (?, ?, ?, ?);
 
 selectAllExpenses:
-SELECT * FROM Expense;
+SELECT * FROM expense;
 
 selectExpenseById:
-SELECT * FROM Expense
+SELECT * FROM expense
 WHERE id = ?;
 
 deleteExpenseById:
-DELETE FROM Expense
+DELETE FROM expense
 WHERE id = ?;
