@@ -14,8 +14,6 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import org.denis.expenseapp.presentation.ui.homeScreen.tabs.homeTab.HomeTab
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import org.denis.expenseapp.presentation.common.topBars.TopBarHome
 
 class HomeTabNavigatorScreen : Screen {

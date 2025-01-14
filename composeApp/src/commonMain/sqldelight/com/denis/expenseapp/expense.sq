@@ -1,0 +1,11 @@
+CREATE TABLE hockeyPlayer (
+    player_number INTEGER PRIMARY KEY NOT NULL,
+    full_name TEXT NOT NULL
+);
+
+insertPlayer:
+INSERT INTO hockeyPlayer (player_number, full_name)
+VALUES (?, ?);
+
+selectAllPlayers:
+SELECT * FROM hockeyPlayer;

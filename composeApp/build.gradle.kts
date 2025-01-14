@@ -1,4 +1,3 @@
-import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -9,14 +8,15 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
 
-    id("app.cash.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+
         }
     }
 
@@ -34,17 +34,6 @@ kotlin {
         }
     }
 
-    // Remove Beta warning at compile
-    targets.configureEach {
-        compilations.configureEach {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    freeCompilerArgs.add("-Xexpect-actual-classes")
-                }
-            }
-        }
-    }
-    
     sourceSets {
         commonMain.dependencies {
             // Base implementation
@@ -63,7 +52,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel.navigation)
 
             // SQLDelight
-            implementation(libs.sqldelight.runtime)
+            implementation(libs.sql.runtime)
 
             // Moko Resources
             api(libs.resources)
@@ -82,6 +71,9 @@ kotlin {
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.tab.navigator)
             implementation(libs.voyager.bottom.sheet.navigator)
+
+            // Datetime
+            implementation(libs.kotlinx.datetime)
         }
 
         androidMain.dependencies {
@@ -89,20 +81,12 @@ kotlin {
             implementation(libs.androidx.activity.compose)
 
             // SQLDelight
-            implementation(libs.sqldelight.android.driver)
+            implementation(libs.sql.android.driver)
         }
 
         iosMain.dependencies {
             // SQLDelight
-            implementation(libs.sqldelight.native.driver)
-        }
-    }
-}
-
-sqldelight {
-    databases {
-        create("ExpenseDatabase") {
-            packageName.set("com.denis.expenseapp")
+            implementation(libs.sql.native.driver)
         }
     }
 }
@@ -110,8 +94,6 @@ sqldelight {
 android {
     namespace = "org.denis.expenseapp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-
 
     defaultConfig {
         applicationId = "org.denis.expenseapp"
@@ -134,7 +116,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
 }
 
 dependencies {
@@ -144,4 +125,12 @@ dependencies {
 
 multiplatformResources {
     resourcesPackage.set("com.denis.expenseapp")
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.denis.expenseapp") // Replace with your actual package
+        }
+    }
 }

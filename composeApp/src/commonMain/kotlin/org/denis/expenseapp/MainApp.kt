@@ -7,7 +7,7 @@ import org.denis.expenseapp.presentation.ui.UILauncher
 
 @Composable
 @Preview
-fun App() {
+fun MainApp() {
     initKoin()
     UILauncher()
 }
