@@ -20,7 +20,6 @@ kotlinxDatetime = "0.6.1"
 mediaCompose = "0.11.0"
 sqlDelight = "2.0.2"
 voyager = "1.1.0-beta03"
-moko-resources = "0.24.4"
 arrowFxCoroutines = "2.0.0"
 activityKtx = "1.9.3"
 coreI18n = "1.0.0-alpha01"
@@ -49,15 +48,6 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinAndr
 
 # DateTime
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
-
-# Moko Media
-media = { module = "dev.icerock.moko:media", version.ref = "mediaCompose" }
-media-compose = { module = "dev.icerock.moko:media-compose", version.ref = "mediaCompose" }
-
-# Moko Resources
-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }
-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-resources" }
 
 # SQLDelight
 sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }

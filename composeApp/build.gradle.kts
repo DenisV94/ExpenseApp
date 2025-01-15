@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,16 +6,14 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-
-    id("dev.icerock.mobile.multiplatform-resources")
     alias(libs.plugins.sqldelight)
 }
 
 kotlin {
     androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
-
         }
     }
 
@@ -28,18 +25,17 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
-
-            export(libs.resources)
-            export("dev.icerock.moko:resources:0.24.4")
         }
     }
+
 
     sourceSets {
         commonMain.dependencies {
             // Base implementation
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material3) //Material 3 lib
+            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -53,15 +49,6 @@ kotlin {
 
             // SQLDelight
             implementation(libs.sql.runtime)
-            implementation("app.cash.sqldelight:primitive-adapters:2.0.2")
-
-            // Moko Resources
-            api(libs.resources)
-            api(libs.resources.compose)
-
-            // Moko media
-            api(libs.media)
-            api(libs.media.compose)
 
             // Arrow
             implementation(libs.arrow.core)
@@ -120,13 +107,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.core.i18n)
     debugImplementation(compose.uiTooling)
-}
-
-multiplatformResources {
-    resourcesPackage.set("com.denis.expenseapp")
 }
 
 sqldelight {

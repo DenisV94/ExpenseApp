@@ -11,8 +11,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.denis.expenseapp.MR
-import dev.icerock.moko.resources.compose.fontFamilyResource
+import expenseapp.composeapp.generated.resources.Res
+import expenseapp.composeapp.generated.resources.montserrat_bold
+import expenseapp.composeapp.generated.resources.montserrat_medium
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun AppTheme(
@@ -33,8 +35,8 @@ fun AppTheme(
             background = Color(0xFFF1F1E6),
         )
 
-    val fontFamilyMontserratMedium: FontFamily = fontFamilyResource(MR.fonts.montserrat_medium)
-    val fontFamilyMontserratBold: FontFamily = fontFamilyResource(MR.fonts.montserrat_bold)
+    val fontFamilyMontserratMedium: FontFamily = FontFamily(Font(Res.font.montserrat_medium))
+    val fontFamilyMontserratBold: FontFamily = FontFamily(Font(Res.font.montserrat_bold))
 
     val typography = Typography(
         bodyLarge = TextStyle(

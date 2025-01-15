@@ -45,7 +45,7 @@ private fun SplashScreenScreen() {
             /*val painter = painterResource(MR.)
             Image(
                 painter = painter,
-                contentDescription = "image",
+                contentDescription = "images",
             )*/
            BodyTextBold(
                 text ="Expense App",
