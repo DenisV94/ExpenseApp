@@ -67,6 +67,7 @@ kotlin {
 
             // Datetime
             implementation(libs.kotlinx.datetime)
+            implementation("network.chaintech:kmp-date-time-picker:1.0.7")
 
         }
 

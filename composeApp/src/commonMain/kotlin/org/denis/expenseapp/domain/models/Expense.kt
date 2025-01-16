@@ -6,7 +6,7 @@ import kotlinx.datetime.LocalDateTime
 data class Expense(
     val id: Long? = null,
     val description: String,
-    val amount: Double,
-    val date: LocalDateTime,
-    val category: ExpenseCategory
+    val amount: Long,
+    val date: LocalDate,
+    val category: Int
 )

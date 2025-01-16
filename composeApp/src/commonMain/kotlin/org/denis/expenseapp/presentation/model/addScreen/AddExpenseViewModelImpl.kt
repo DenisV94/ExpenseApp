@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import network.chaintech.kmp_date_time_picker.utils.now
 import org.denis.expenseapp.data.repository.expenses.ExpenseRepository
 import org.denis.expenseapp.domain.models.Expense
 
@@ -25,7 +27,7 @@ class AddExpenseViewModelImpl(
                 description = "",
                 amount = "",
                 selectedCategory = categories.first(),
-                date = currentTime(),
+                date = LocalDate.now(),
                 categories = categories
             )
         }
@@ -65,7 +67,7 @@ class AddExpenseViewModelImpl(
         }
     }
 
-    private fun selectDate(date: LocalDateTime) {
+    private fun selectDate(date: LocalDate) {
         _uiState.update { currentState ->
             if (currentState is AddExpenseUiState.ExpenseUiState) {
                 currentState.copy(date = date)
@@ -75,12 +77,17 @@ class AddExpenseViewModelImpl(
 
     private fun saveExpense() {
         val currentState = _uiState.value
+
         if (currentState is AddExpenseUiState.ExpenseUiState) {
+            if (currentState.description.isBlank() || currentState.amount.isBlank()) {
+                return
+            }
+
             val expense = Expense(
                 id = 0, // Assuming 0 for new expense, replace with actual logic
                 description = currentState.description,
-                amount = currentState.amount.toDoubleOrNull() ?: 0.0,
-                category = TODO(),
+                amount = currentState.amount.toLong(),
+                category = currentState.selectedCategory.id,
                 date = currentState.date
             )
             viewModelScope.launch {
@@ -89,9 +96,9 @@ class AddExpenseViewModelImpl(
                     _uiState.update {
                         AddExpenseUiState.ExpenseUiState(
                             description = "",
-                            amount = "",
+                            amount = currentState.amount,
                             selectedCategory = currentState.categories.first(),
-                            date = currentTime(),
+                            date = currentState.date,
                             categories = currentState.categories
                         )
                     }

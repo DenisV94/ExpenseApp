@@ -29,12 +29,14 @@ import expenseapp.composeapp.generated.resources.add_screen_description
 import expenseapp.composeapp.generated.resources.add_screen_description_hint
 import expenseapp.composeapp.generated.resources.add_screen_save_button
 import expenseapp.composeapp.generated.resources.add_screen_title
+import org.denis.expenseapp.presentation.common.VisibleDatePicker
 import org.denis.expenseapp.presentation.common.topBars.BackButtonTopBar
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseUiAction
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseUiState
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseViewModel
 import org.denis.expenseapp.presentation.model.addScreen.CategoryUiModel
 import org.denis.expenseapp.presentation.theme.ButtonPrimary
+import org.denis.expenseapp.presentation.theme.CurrencyInputField
 import org.denis.expenseapp.presentation.theme.MainBodyStyle
 import org.denis.expenseapp.presentation.theme.TextEditField
 import org.denis.expenseapp.presentation.theme.TextEditTitle
@@ -115,7 +117,9 @@ class AddScreen : Screen {
 
             // Date Field
             TextEditTitle(text = stringResource(Res.string.add_screen_date))
-
+            VisibleDatePicker(
+                onDateSelected = { onAction(AddExpenseUiAction.SelectDate(it)) }
+            )
 
             // Description Field
             TextEditTitle(text = stringResource(Res.string.add_screen_description))
@@ -129,7 +133,7 @@ class AddScreen : Screen {
 
             // Amount Field
             TextEditTitle(text = stringResource(Res.string.add_screen_amount))
-            TextEditField(
+            CurrencyInputField(
                 value = uiState.amount,
                 onValueChange = { onAction(AddExpenseUiAction.UpdateAmount(it)) },
                 label = stringResource(Res.string.add_screen_amount_hint),

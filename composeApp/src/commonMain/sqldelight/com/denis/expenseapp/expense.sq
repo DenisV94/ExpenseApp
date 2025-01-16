@@ -1,9 +1,9 @@
 CREATE TABLE expense (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     description TEXT NOT NULL,
-    amount REAL NOT NULL,
+    amount INTEGER NOT NULL,
     date TEXT NOT NULL,
-    category TEXT NOT NULL
+    category INTEGER NOT NULL
 );
 
 insertExpense:

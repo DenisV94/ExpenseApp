@@ -7,7 +7,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import org.denis.expenseapp.domain.EitherResult
 import org.denis.expenseapp.domain.models.Expense
-import org.denis.expenseapp.domain.models.ExpenseCategory
 
 class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
 
@@ -27,7 +26,7 @@ class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
                 description = expense.description,
                 amount = expense.amount,
                 date = expense.date.toString(),
-                category = expense.category.name
+                category = expense.category.toLong()
             )
             EitherResult.Success
         }
@@ -55,7 +54,7 @@ class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
                 description = expense.description,
                 amount = expense.amount,
                 date = expense.date.toString(),
-                category = expense.category.name,
+                category = expense.category.toLong(),
                 id = expenseId
             )
             EitherResult.Success
@@ -68,8 +67,8 @@ class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
             id = this.id,
             description = this.description,
             amount = this.amount,
-            date = LocalDateTime.parse(this.date),
-            category = ExpenseCategory.valueOf(this.category)
+            date = LocalDate.parse(this.date),
+            category = this.category.toInt()
         )
     }
 }

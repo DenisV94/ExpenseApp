@@ -1,5 +1,6 @@
 package org.denis.expenseapp.presentation.model.addScreen
 
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 
 sealed class AddExpenseUiState {
@@ -8,7 +9,7 @@ sealed class AddExpenseUiState {
         val description: String,
         val amount: String,
         val selectedCategory: CategoryUiModel,
-        val date: LocalDateTime,
+        val date: LocalDate,
         val categories: List<CategoryUiModel>
     ) : AddExpenseUiState()
     data object Error : AddExpenseUiState()
@@ -19,6 +20,6 @@ sealed class AddExpenseUiAction {
     data class UpdateDescription(val description: String) : AddExpenseUiAction()
     data class UpdateAmount(val amount: String) : AddExpenseUiAction()
     data class SelectCategory(val category: CategoryUiModel) : AddExpenseUiAction()
-    data class SelectDate(val date: LocalDateTime) : AddExpenseUiAction()
+    data class SelectDate(val date: LocalDate) : AddExpenseUiAction()
     data object SaveExpense : AddExpenseUiAction()
 }

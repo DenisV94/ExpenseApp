@@ -1,5 +1,7 @@
 package org.denis.expenseapp.di
 
+import org.denis.expenseapp.data.local.expense.LocalExpenseData
+import org.denis.expenseapp.data.local.expense.LocalExpenseDataImpl
 import org.denis.expenseapp.data.local.sqlDriver.DriverFactory
 import org.denis.expenseapp.data.local.sqlDriver.createDatabase
 import org.denis.expenseapp.data.repository.expenses.ExpenseRepository
@@ -33,6 +35,11 @@ val databaseModule = module {
     single {
         createDatabase(driver = get())
     }
+
+    single<LocalExpenseData> {
+        LocalExpenseDataImpl(driver = get())
+    }
+
     single<ExpenseRepository> {
         ExpenseRepositoryImpl(database = get())
     }

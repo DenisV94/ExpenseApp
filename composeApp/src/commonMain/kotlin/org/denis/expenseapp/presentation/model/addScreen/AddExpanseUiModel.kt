@@ -8,7 +8,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
 data class CategoryUiModel(
-    val id: String,
+    val id: Int,
     val icon: DrawableResource,
     val title: StringResource
 )
@@ -23,7 +23,7 @@ fun ExpenseCategory.toCategoryUiModel(): CategoryUiModel {
         ExpenseCategoryIcon.OTHER -> Res.drawable.ic_arrow_back
     }
     return CategoryUiModel(
-        id = this.id.toString(),
+        id = this.id,
         icon = iconResId,
         title = this.descriptionResId
     )
