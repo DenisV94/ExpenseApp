@@ -7,28 +7,21 @@ import expenseapp.composeapp.generated.resources.category_health
 import expenseapp.composeapp.generated.resources.category_other
 import expenseapp.composeapp.generated.resources.category_transport
 import expenseapp.composeapp.generated.resources.category_utilities
+import expenseapp.composeapp.generated.resources.ic_arrow_back
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
 
-enum class ExpenseCategoryIcon {
-    FOOD,
-    TRANSPORT,
-    ENTERTAINMENT,
-    HEALTH,
-    UTILITIES,
-    OTHER;
-    val iconName: String = name.lowercase()
-}
 
 enum class ExpenseCategory(
     val id: Int,
     val descriptionResId: StringResource,
-    val icon: ExpenseCategoryIcon
+    val icon: DrawableResource
 ) {
-    FOOD(1, Res.string.category_food, ExpenseCategoryIcon.FOOD),
-    TRANSPORT(2, Res.string.category_transport, ExpenseCategoryIcon.TRANSPORT),
-    ENTERTAINMENT(3, Res.string.category_entertainment, ExpenseCategoryIcon.ENTERTAINMENT),
-    HEALTH(4, Res.string.category_health, ExpenseCategoryIcon.HEALTH),
-    UTILITIES(5, Res.string.category_utilities, ExpenseCategoryIcon.UTILITIES),
-    OTHER(6, Res.string.category_other, ExpenseCategoryIcon.OTHER);
+    FOOD(id=1, descriptionResId=Res.string.category_food, icon= Res.drawable.ic_arrow_back),
+    TRANSPORT(2, Res.string.category_transport, Res.drawable.ic_arrow_back),
+    ENTERTAINMENT(3, Res.string.category_entertainment, Res.drawable.ic_arrow_back),
+    HEALTH(4, Res.string.category_health, Res.drawable.ic_arrow_back),
+    UTILITIES(5, Res.string.category_utilities, Res.drawable.ic_arrow_back),
+    OTHER(6, Res.string.category_other, Res.drawable.ic_arrow_back);
 }

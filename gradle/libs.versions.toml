@@ -24,6 +24,7 @@ voyager = "1.1.0-beta03"
 arrowFxCoroutines = "2.0.0"
 activityKtx = "1.9.3"
 coreI18n = "1.0.0-alpha01"
+foundationAndroid = "1.7.6"
 
 
 [libraries]
@@ -68,6 +69,7 @@ arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowFxCoroutin
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrowFxCoroutines" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
+androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

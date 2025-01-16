@@ -1,0 +1,53 @@
+package org.denis.expenseapp.presentation.model.detailsScreen
+
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
+import network.chaintech.kmp_date_time_picker.utils.now
+import org.denis.expenseapp.data.repository.expenses.ExpenseRepository
+import org.denis.expenseapp.domain.models.Expense
+import org.denis.expenseapp.domain.models.ExpenseCategory
+import org.denis.expenseapp.presentation.model.homeScreen.HomeUiState
+
+class DetailsViewModelImpl(
+    private val repository: ExpenseRepository
+) : DetailsViewModel() {
+
+    private val _uiState = MutableStateFlow<DetailsUiState>(DetailsUiState.Loading)
+    override val uiState: StateFlow<DetailsUiState> = _uiState
+
+    override fun selectedExpense(expenseId: Long) {
+        viewModelScope.launch {
+            val categoryList = repository.getCategoryList()
+            repository.getAllExpenses().fold(
+                { _uiState.value = DetailsUiState.Error },
+                { expenses ->
+                    val expenseUiModels = composeDetailsUiModelList(expenses, categoryList)
+                    _uiState.value = DetailsUiState.Success(expenseUiModels)
+                }
+            )
+        }
+    }
+
+    private fun composeDetailsUiModelList(
+        expenses: List<Expense>,
+        categoryList: List<ExpenseCategory>
+    ): List<DetailsUiModel> {
+        return expenses.map { expense ->
+            // Find the category based on the ID
+            val category = categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
+
+            DetailsUiModel(
+                amount = expense.amount.toString(),
+                description = expense.description,
+                date = expense.date.toString(),
+                iconResId = category.icon,
+                categoryName = category.descriptionResId
+            )
+        }
+    }
+
+}

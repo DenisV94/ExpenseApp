@@ -8,6 +8,10 @@ import org.denis.expenseapp.data.repository.expenses.ExpenseRepository
 import org.denis.expenseapp.data.repository.expenses.ExpenseRepositoryImpl
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseViewModel
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseViewModelImpl
+import org.denis.expenseapp.presentation.model.detailsScreen.DetailsViewModel
+import org.denis.expenseapp.presentation.model.detailsScreen.DetailsViewModelImpl
+import org.denis.expenseapp.presentation.model.homeScreen.HomeViewModel
+import org.denis.expenseapp.presentation.model.homeScreen.HomeViewModelImpl
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -21,11 +25,21 @@ fun initKoin() {
 
 fun appModule() = listOf(
     databaseModule,
-    addExpenseModule
+    homeScreenModule,
+    addExpenseScreenModule,
+    detailsScreenModule
 )
 
-val addExpenseModule = module {
+val homeScreenModule = module {
+    viewModel<HomeViewModel> { HomeViewModelImpl(repository = get()) }
+}
+
+val addExpenseScreenModule = module {
     viewModel<AddExpenseViewModel> { AddExpenseViewModelImpl(repository = get()) }
+}
+
+val detailsScreenModule = module {
+    viewModel<DetailsViewModel> { DetailsViewModelImpl(repository = get()) }
 }
 
 val databaseModule = module {

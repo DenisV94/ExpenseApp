@@ -36,7 +36,9 @@ class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
         return executeQuery {
             db.expenseQueries.selectAllExpenses()
                 .executeAsList()
-                .map { it.toDomain() }
+                .map {
+                    it.toDomain()
+                }
         }
     }
 
@@ -63,11 +65,12 @@ class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
 
     // Extension function to map SQLDelight-generated model to domain model
     private fun com.denis.expenseapp.Expense.toDomain(): Expense {
+        val date = this.date.substringBefore("T") // Extract only the date part
         return Expense(
             id = this.id,
             description = this.description,
             amount = this.amount,
-            date = LocalDate.parse(this.date),
+            date = LocalDate.parse(date), // Parse the date part safely
             category = this.category.toInt()
         )
     }

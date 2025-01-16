@@ -21,7 +21,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import org.denis.expenseapp.presentation.ui.homeScreen.tabs.homeTab.HomeTab
 
-internal class HomeTabNavigatorScreen: Screen {
+internal class HomeTabNavigatorScreen : Screen {
     @Composable
     override fun Content() {
         // Initialize the list of tabs
@@ -30,14 +30,15 @@ internal class HomeTabNavigatorScreen: Screen {
         // Wrap with TabNavigator to initialize it with a default tab
         TabNavigator(tab = HomeTab) {
             // Observe the current tab from the TabNavigator
-            val currentTab = LocalTabNavigator.current.current
+            val tabNavigator = LocalTabNavigator.current
+            val isCurrentTabInTabs = tabs.any { it.key == tabNavigator.current.key }
 
             Scaffold(
                 content = {
                     // Adjust padding based on whether the NavigationBar is visible
                     Column(
                         modifier = Modifier.padding(
-                            bottom = if (currentTab in tabs) 58.dp else 0.dp
+                            bottom = if (isCurrentTabInTabs) 58.dp else 0.dp
                         )
                     ) {
                         CurrentTab() // Render the content of the current tab
@@ -45,7 +46,7 @@ internal class HomeTabNavigatorScreen: Screen {
                 },
                 bottomBar = {
                     // Conditionally show the NavigationBar based on the current tab
-                    if (currentTab in tabs) {
+                    if (isCurrentTabInTabs) {
                         NavigationBar(
                             containerColor = MaterialTheme.colorScheme.background,
                             modifier = Modifier.height(58.dp)
@@ -58,7 +59,6 @@ internal class HomeTabNavigatorScreen: Screen {
                 }
             )
         }
-
     }
 }
 

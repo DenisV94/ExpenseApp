@@ -6,12 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
 import network.chaintech.kmp_date_time_picker.utils.now
 import org.denis.expenseapp.data.repository.expenses.ExpenseRepository
 import org.denis.expenseapp.domain.models.Expense
-
-import org.denis.expenseapp.utils.currentTime
 
 class AddExpenseViewModelImpl(
     private val repository: ExpenseRepository

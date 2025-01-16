@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.denis.expenseapp.presentation.platform.getStatusBarHeightDp
 import org.denis.expenseapp.presentation.theme.BodyTextBold
@@ -23,27 +21,19 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 fun TopBarHome(
     title: String
 ) {
-
     Box(
         modifier = Modifier
-            .height(52.dp + getStatusBarHeightDp().dp) // Adjust the height by platform
-            //.background(color = MaterialTheme.colorScheme.background)
-            .background(Color.Gray)
+            .height(48.dp + getStatusBarHeightDp().dp) // Adjust the height by platform
+            .background(androidx.compose.material.MaterialTheme.colors.surface)
     ) {
-
         Row(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
                 .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             BodyTextBold(text = title)
             Spacer(modifier = Modifier.weight(1f))
-
-
-
-
         }
     }
 }
