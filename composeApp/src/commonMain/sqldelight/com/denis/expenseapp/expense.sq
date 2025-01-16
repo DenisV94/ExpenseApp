@@ -20,3 +20,8 @@ WHERE id = ?;
 deleteExpenseById:
 DELETE FROM expense
 WHERE id = ?;
+
+updateExpense:
+UPDATE expense
+SET description = ?, amount = ?, date = ?, category = ?
+WHERE id = ?;

@@ -15,14 +15,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 
-    @Composable
-    fun BasicTextEditField(
+@Composable
+    fun TextEditField(
         value: String,
         onValueChange: (String) -> Unit,
-        label: String,
+        label: String  = "",
         modifier: Modifier = Modifier,
         leadingIcon: @Composable (() -> Unit)? = null,
         shape: Shape = MaterialTheme.shapes.medium,

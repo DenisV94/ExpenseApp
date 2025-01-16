@@ -7,5 +7,6 @@ import org.denis.expenseapp.domain.models.Expense
 interface LocalExpenseData {
     suspend fun createExpense(expense: Expense): Either<EitherResult.LocalDatabaseError, EitherResult.Success>
     suspend fun getExpenses(): Either<EitherResult.LocalDatabaseError, List<Expense>>
-    suspend fun deleteExpense(id: Int): Either<EitherResult.LocalDatabaseError, Boolean>
+    suspend fun deleteExpense(id: Long): Either<EitherResult.LocalDatabaseError, EitherResult.Success>
+    suspend fun updateExpense(expense: Expense): Either<EitherResult.LocalDatabaseError, EitherResult.Success>
 }

@@ -9,3 +9,8 @@ import platform.UIKit.UIApplication
 actual fun getStatusBarHeightDp(): Float {
     return  (UIApplication.sharedApplication.statusBarFrame.size+16).toFloat()
 }
+
+@Composable
+actual fun getNavBarHeightDp(): Float {
+    return 0f
+}

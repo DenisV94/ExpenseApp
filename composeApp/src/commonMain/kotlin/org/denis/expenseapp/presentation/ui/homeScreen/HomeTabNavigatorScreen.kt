@@ -3,6 +3,7 @@ package org.denis.expenseapp.presentation.ui.homeScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +19,6 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import org.denis.expenseapp.presentation.common.topBars.TopBarHome
 import org.denis.expenseapp.presentation.ui.homeScreen.tabs.homeTab.HomeTab
 
 internal class HomeTabNavigatorScreen: Screen {
@@ -37,7 +37,7 @@ internal class HomeTabNavigatorScreen: Screen {
                     // Adjust padding based on whether the NavigationBar is visible
                     Column(
                         modifier = Modifier.padding(
-                            bottom = if (currentTab in tabs) 56.dp else 0.dp
+                            bottom = if (currentTab in tabs) 58.dp else 0.dp
                         )
                     ) {
                         CurrentTab() // Render the content of the current tab
@@ -47,7 +47,8 @@ internal class HomeTabNavigatorScreen: Screen {
                     // Conditionally show the NavigationBar based on the current tab
                     if (currentTab in tabs) {
                         NavigationBar(
-                            containerColor = MaterialTheme.colorScheme.background
+                            containerColor = MaterialTheme.colorScheme.background,
+                            modifier = Modifier.height(58.dp)
                         ) {
                             tabs.forEach { tab ->
                                 TabNavigationItem(tab)

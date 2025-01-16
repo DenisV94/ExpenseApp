@@ -1,5 +1,15 @@
 package org.denis.expenseapp.domain.models
 
+import expenseapp.composeapp.generated.resources.Res
+import expenseapp.composeapp.generated.resources.category_entertainment
+import expenseapp.composeapp.generated.resources.category_food
+import expenseapp.composeapp.generated.resources.category_health
+import expenseapp.composeapp.generated.resources.category_other
+import expenseapp.composeapp.generated.resources.category_transport
+import expenseapp.composeapp.generated.resources.category_utilities
+import org.jetbrains.compose.resources.StringResource
+
+
 enum class ExpenseCategoryIcon {
     FOOD,
     TRANSPORT,
@@ -11,13 +21,14 @@ enum class ExpenseCategoryIcon {
 }
 
 enum class ExpenseCategory(
-    val description: String,
+    val id: Int,
+    val descriptionResId: StringResource,
     val icon: ExpenseCategoryIcon
 ) {
-    FOOD("Food and Dining", ExpenseCategoryIcon.FOOD),
-    TRANSPORT("Transportation", ExpenseCategoryIcon.TRANSPORT),
-    ENTERTAINMENT("Entertainment", ExpenseCategoryIcon.ENTERTAINMENT),
-    HEALTH("Health and Fitness", ExpenseCategoryIcon.HEALTH),
-    UTILITIES("Utilities and Bills", ExpenseCategoryIcon.UTILITIES),
-    OTHER("Other Expenses", ExpenseCategoryIcon.OTHER);
+    FOOD(1, Res.string.category_food, ExpenseCategoryIcon.FOOD),
+    TRANSPORT(2, Res.string.category_transport, ExpenseCategoryIcon.TRANSPORT),
+    ENTERTAINMENT(3, Res.string.category_entertainment, ExpenseCategoryIcon.ENTERTAINMENT),
+    HEALTH(4, Res.string.category_health, ExpenseCategoryIcon.HEALTH),
+    UTILITIES(5, Res.string.category_utilities, ExpenseCategoryIcon.UTILITIES),
+    OTHER(6, Res.string.category_other, ExpenseCategoryIcon.OTHER);
 }

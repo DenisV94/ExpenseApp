@@ -23,16 +23,32 @@ fun AppTheme(
 ) {
     val darkColorScheme =
         darkColorScheme(
-            primary = Color(0xFF6200EE),
-            secondary = Color(0xFF03DAC6),
-            background = Color(0xf1f2f4)
+            primary = Color(0xFF3B82F6),
+            onPrimary = Color(0xFFFFFFFF),
+            background = Color(0xFFF5F7FA),
+            onBackground = Color(0xFF000000),
+            surface = Color(0xFFFFFFFF),
+            onSurface = Color(0xFF000000),
+            secondary = Color(0xFF6366F1),
+            onSecondary = Color(0xFFFFFFFF),
+            outline = Color(0xFFCBD5E1),
+            surfaceVariant = Color(0xFFE2E8F0),
+            error = Color(0xFFFF6B6B)
         )
 
     val lightColorScheme =
         lightColorScheme(
-            primary = Color(0xFF6200EE),
-            secondary = Color(0xFF03DAC6),
-            background = Color(0xFFF1F1E6),
+            primary = Color(0xFF3B82F6),
+            onPrimary = Color(0xFFFFFFFF),
+            background = Color(0xFFF5F7FA),
+            onBackground = Color(0xFF000000),
+            surface = Color(0xFFFFFFFF),
+            onSurface = Color(0xFF000000),
+            secondary = Color(0xFF6366F1),
+            onSecondary = Color(0xFFFFFFFF),
+            outline = Color(0xFFCBD5E1),
+            surfaceVariant = Color(0xFFE2E8F0),
+            error = Color(0xFFFF6B6B)
         )
 
     val fontFamilyMontserratMedium: FontFamily = FontFamily(Font(Res.font.montserrat_medium))

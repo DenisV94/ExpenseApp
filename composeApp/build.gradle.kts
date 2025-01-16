@@ -41,10 +41,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.kotlinx.coroutines.core)
 
             // ViewModel
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
-
+            implementation(libs.lifecycle.viewmodel.compose)
 
             // Koin
             implementation(libs.koin.compose)
@@ -67,6 +67,7 @@ kotlin {
 
             // Datetime
             implementation(libs.kotlinx.datetime)
+
         }
 
         androidMain.dependencies {

@@ -3,6 +3,7 @@ package org.denis.expenseapp.presentation.theme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,10 +22,15 @@ fun ButtonPrimary(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.height(48.dp),
+        modifier = modifier
+            .height(48.dp),
         contentPadding = PaddingValues(8.dp),
         shape = shape,
-        enabled = enabled
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
+            contentColor = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+        )
     ) {
         Text(
             text = text,

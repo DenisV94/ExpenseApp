@@ -18,13 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import cafe.adriel.voyager.navigator.Navigator
-import org.denis.expenseapp.presentation.platform.getStatusBarHeightDp
-import org.denis.expenseapp.presentation.theme.BodyTextBold
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
 import expenseapp.composeapp.generated.resources.Res
 import expenseapp.composeapp.generated.resources.ic_arrow_back
+import org.denis.expenseapp.presentation.platform.getStatusBarHeightDp
+import org.denis.expenseapp.presentation.theme.BodyTextBold
+import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
@@ -35,22 +33,17 @@ fun BackButtonTopBar(
 
     Box(
         modifier = Modifier
-            .height(52.dp + getStatusBarHeightDp().dp) // Adjust the height by platform
+            .height(48.dp + getStatusBarHeightDp().dp) // Adjust the height by platform
             //.background(color = MaterialTheme.colorScheme.background)
             .background(Color.Gray)
     ) {
 
         Row(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
                 .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-            BodyTextBold(text = title)
-            Spacer(modifier = Modifier.weight(1f))
-
-
             IconButton(
                 onClick = onBackButtonPressed,
                 modifier = Modifier
@@ -67,6 +60,11 @@ fun BackButtonTopBar(
                     modifier = Modifier.size(24.dp)
                 )
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+            BodyTextBold(text = title)
+            Spacer(modifier = Modifier.weight(1f))
+
         }
     }
 }

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class AddExpenseViewModel:ViewModel() {
     abstract val uiState: StateFlow<AddExpenseUiState>
-    abstract fun onAction(action: AddExpenseUiAction)
+    abstract fun onSaveIncomePressed(action: AddExpenseUiAction)
 }

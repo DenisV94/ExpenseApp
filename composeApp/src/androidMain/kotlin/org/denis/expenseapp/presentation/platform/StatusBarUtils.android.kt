@@ -13,3 +13,12 @@ actual fun getStatusBarHeightDp(): Float {
     val density = LocalDensity.current.density
     return statusBarHeightPx / density
 }
+
+@Composable
+actual fun getNavBarHeightDp(): Float {
+    val view = LocalView.current
+    val windowInsets = WindowInsetsCompat.toWindowInsetsCompat(view.rootWindowInsets)
+    val navBarHeightPx = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+    val density = LocalDensity.current.density
+    return navBarHeightPx / density
+}

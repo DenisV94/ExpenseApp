@@ -19,3 +19,17 @@ fun BodyTextBold(
         textAlign = textAlign,
     )
 }
+
+@Composable
+fun TextEditTitle(
+    text: String,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Start
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = modifier,
+        textAlign = textAlign,
+    )
+}

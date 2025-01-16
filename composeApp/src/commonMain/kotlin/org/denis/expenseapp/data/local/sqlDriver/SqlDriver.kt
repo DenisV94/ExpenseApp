@@ -4,7 +4,7 @@ import app.cash.sqldelight.db.SqlDriver
 import com.denis.expenseapp.Database
 
 
-expect class DriverFactory {
+expect class DriverFactory() {
     fun createDriver(): SqlDriver
 }
 

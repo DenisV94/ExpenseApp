@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Add expense -->
     <string name="add_screen_title">Add expense</string>
+    <string name="add_screen_description">Description</string>
+    <string name="add_screen_amount">Amount</string>
+    <string name="add_screen_date">Select date</string>
+    <string name="add_screen_category">Select category</string>
+    <string name="add_screen_save_button">Register</string>
+    <!-- Hints for text edit screens -->
+    <string name="add_screen_description_hint">Enter description</string>
+    <string name="add_screen_amount_hint">Enter amount</string>
+
+    <!--Base categories -->
+    <string name="category_food">Food</string>
+    <string name="category_transport">Transport</string>
+    <string name="category_entertainment">Entertainment</string>
+    <string name="category_health">Health</string>
+    <string name="category_utilities">Utilities</string>
+    <string name="category_other">Other</string>
 </resources>
