@@ -25,29 +25,32 @@ class DetailsViewModelImpl(
             repository.getAllExpenses().fold(
                 { _uiState.value = DetailsUiState.Error },
                 { expenses ->
-                    val expenseUiModels = composeDetailsUiModelList(expenses, categoryList)
-                    _uiState.value = DetailsUiState.Success(expenseUiModels)
+                    val expense = expenses.find { it.id == expenseId }
+                    if (expense != null) {
+                        val expenseUiModel = composeDetailsUiModel(expense, categoryList)
+                        _uiState.value = DetailsUiState.Success(expenseUiModel)
+                    } else {
+                        _uiState.value = DetailsUiState.Error
+                    }
                 }
             )
         }
     }
 
-    private fun composeDetailsUiModelList(
-        expenses: List<Expense>,
+    private fun composeDetailsUiModel(
+        expense: Expense,
         categoryList: List<ExpenseCategory>
-    ): List<DetailsUiModel> {
-        return expenses.map { expense ->
-            // Find the category based on the ID
-            val category = categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
+    ): DetailsUiModel {
+        // Find the category based on the ID
+        val category = categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
 
-            DetailsUiModel(
-                amount = expense.amount.toString(),
-                description = expense.description,
-                date = expense.date.toString(),
-                iconResId = category.icon,
-                categoryName = category.descriptionResId
-            )
-        }
+        return DetailsUiModel(
+            amount = expense.amount.toString(),
+            description = expense.description,
+            date = expense.date.toString(),
+            iconResId = category.icon,
+            categoryName = category.descriptionResId
+        )
     }
 
 }

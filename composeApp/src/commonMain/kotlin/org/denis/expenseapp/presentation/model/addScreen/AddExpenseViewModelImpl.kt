@@ -90,15 +90,7 @@ class AddExpenseViewModelImpl(
             viewModelScope.launch {
                 val result = repository.addExpense(expense)
                 if (result.isRight()) {
-                    _uiState.update {
-                        AddExpenseUiState.ExpenseUiState(
-                            description = "",
-                            amount = currentState.amount,
-                            selectedCategory = currentState.categories.first(),
-                            date = currentState.date,
-                            categories = currentState.categories
-                        )
-                    }
+
                 } else {
                     TODO()
                 }

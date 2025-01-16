@@ -13,8 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,17 +32,12 @@ import org.denis.expenseapp.presentation.model.homeScreen.HomeUiState
 import org.denis.expenseapp.presentation.model.homeScreen.HomeViewModel
 import org.denis.expenseapp.presentation.theme.ButtonPrimary
 import org.denis.expenseapp.presentation.theme.MainBodyStyle
+import org.denis.expenseapp.presentation.theme.TextEditTitle
 import org.denis.expenseapp.presentation.ui.addScreen.AddScreen
-import org.jetbrains.compose.resources.painterResource
-import org.koin.compose.viewmodel.koinViewModel
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.text.style.LineHeightStyle
 import org.denis.expenseapp.presentation.ui.detailsScreen.DetailsScreen
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 internal class HomeScreen : Screen {
     @Composable
@@ -47,6 +47,10 @@ internal class HomeScreen : Screen {
 
         // Collect UI state
         val uiState = viewModel.uiState.collectAsState().value
+
+        LaunchedEffect(Unit) {
+            viewModel.reloadView()
+        }
 
         Scaffold(
             topBar = {
@@ -103,6 +107,8 @@ internal class HomeScreen : Screen {
 
     @Composable
     fun ExpenseList(expenses: List<ExpenseUiModel>, onItemClick: (ExpenseUiModel) -> Unit) {
+        TextEditTitle(text = "My expenses")
+        Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(expenses) { expense ->
                 ExpenseItem(

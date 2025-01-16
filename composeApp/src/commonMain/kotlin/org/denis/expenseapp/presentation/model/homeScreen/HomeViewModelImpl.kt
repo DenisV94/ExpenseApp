@@ -3,10 +3,7 @@ package org.denis.expenseapp.presentation.model.homeScreen
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.LocalDate
-import network.chaintech.kmp_date_time_picker.utils.now
 import org.denis.expenseapp.data.repository.expenses.ExpenseRepository
 import org.denis.expenseapp.domain.models.Expense
 import org.denis.expenseapp.domain.models.ExpenseCategory
@@ -18,7 +15,7 @@ class HomeViewModelImpl(
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     override val uiState: StateFlow<HomeUiState> = _uiState
 
-    init {
+    override fun reloadView() {
         viewModelScope.launch {
             val categoryList = repository.getCategoryList()
             repository.getAllExpenses().fold(
