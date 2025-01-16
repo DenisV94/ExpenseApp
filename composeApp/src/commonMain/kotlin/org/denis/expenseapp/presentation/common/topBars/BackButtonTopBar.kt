@@ -30,7 +30,7 @@ import expenseapp.composeapp.generated.resources.ic_arrow_back
 @Composable
 fun BackButtonTopBar(
     title: String,
-    navigator: Navigator
+    onBackButtonPressed: () -> Unit
 ) {
 
     Box(
@@ -52,7 +52,7 @@ fun BackButtonTopBar(
 
 
             IconButton(
-                onClick = { navigator.pop() },
+                onClick = onBackButtonPressed,
                 modifier = Modifier
                     .zIndex(1f)
                     .size(28.dp)

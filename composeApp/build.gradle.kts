@@ -42,6 +42,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
+            // ViewModel
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
+
+
             // Koin
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -59,6 +63,7 @@ kotlin {
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.tab.navigator)
             implementation(libs.voyager.bottom.sheet.navigator)
+            implementation("cafe.adriel.voyager:voyager-koin:1.1.0-beta03")
 
             // Datetime
             implementation(libs.kotlinx.datetime)
