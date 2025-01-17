@@ -31,12 +31,16 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import expenseapp.composeapp.generated.resources.Res
+import expenseapp.composeapp.generated.resources.add_screen_date
+import expenseapp.composeapp.generated.resources.home_screen_error
 import expenseapp.composeapp.generated.resources.home_screen_my_expenses
 import expenseapp.composeapp.generated.resources.home_screen_no_expenses
 import expenseapp.composeapp.generated.resources.home_screen_title
 import org.denis.expenseapp.presentation.common.BodyTextLarge
 import org.denis.expenseapp.presentation.common.BodyTextMedium
 import org.denis.expenseapp.presentation.common.BodyTextSmall
+import org.denis.expenseapp.presentation.common.ButtonPrimary
+import org.denis.expenseapp.presentation.common.LoadingState
 import org.denis.expenseapp.presentation.common.MainBodyStyle
 import org.denis.expenseapp.presentation.common.topBars.TopBarHome
 import org.denis.expenseapp.presentation.model.homeScreen.ExpenseUiModel
@@ -88,7 +92,7 @@ data object HomeScreen : Screen {
                 Column {
                     Spacer(modifier = Modifier.height(16.dp))
                     when (uiState) {
-                        is HomeUiState.Loading -> {}
+                        is HomeUiState.Loading -> LoadingState()
                         is HomeUiState.Success -> {
                             ExpenseList(
                                 expenses = uiState.userExpenses,
@@ -181,8 +185,21 @@ data object HomeScreen : Screen {
 
     @Composable
     fun ErrorState() {
-        Box(modifier = Modifier.fillMaxWidth()) {
-
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                BodyTextLarge(
+                    text = stringResource(Res.string.home_screen_error),
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 }

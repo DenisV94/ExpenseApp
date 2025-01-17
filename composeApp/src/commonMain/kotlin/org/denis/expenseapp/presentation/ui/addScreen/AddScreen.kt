@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -96,9 +95,11 @@ class AddScreen : Screen {
                     uiState = uiState,
                     onAction = onAction
                 )
+
                 is AddExpenseUiState.RegisterCompleted -> {
                     navigator.pop()
                 }
+
                 is AddExpenseUiState.Error -> ErrorState(
                     onRetry = { onAction(AddExpenseUiAction.Retry) }
                 )

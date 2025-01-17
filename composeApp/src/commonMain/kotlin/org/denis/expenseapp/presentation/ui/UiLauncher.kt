@@ -20,7 +20,7 @@ fun UILauncher() {
         if (showSplashScreen) {
             SplashScreen(onTimeout = { showSplashScreen = false })
         } else {
-            Navigator(HomeTabNavigatorScreen()){ navigator ->
+            Navigator(HomeTabNavigatorScreen()) { navigator ->
                 SlideTransition(navigator = navigator)
             }
         }
