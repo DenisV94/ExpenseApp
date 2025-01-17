@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.denis.expenseapp.presentation.theme.BodyTextBold
+import org.denis.expenseapp.presentation.common.TitleTextBold
 
 @Composable
 fun SplashScreen(onTimeout: () -> Unit) {
@@ -47,7 +47,7 @@ private fun SplashScreenScreen() {
                 painter = painter,
                 contentDescription = "images",
             )*/
-            BodyTextBold(
+            TitleTextBold(
                 text = "Expense App",
             )
         }

@@ -13,6 +13,7 @@ sealed class AddExpenseUiState {
     ) : AddExpenseUiState()
 
     data object Error : AddExpenseUiState()
+    data object RegisterCompleted : AddExpenseUiState()
 }
 
 // UiAction: Represents actions/events triggered by the user

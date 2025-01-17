@@ -3,9 +3,11 @@ package org.denis.expenseapp.presentation.ui.homeScreen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -29,6 +31,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import expenseapp.composeapp.generated.resources.Res
 import expenseapp.composeapp.generated.resources.ic_plus
+import org.denis.expenseapp.presentation.platform.getNavBarHeightDp
 import org.denis.expenseapp.presentation.ui.addScreen.AddScreen
 import org.denis.expenseapp.presentation.ui.homeScreen.tabs.homeTab.HomeTab
 import org.jetbrains.compose.resources.painterResource
@@ -60,7 +63,13 @@ class HomeTabNavigatorScreen : Screen {
                     }
                 },
                 content = {
-                    CurrentTab()
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(bottom = 65.dp-getNavBarHeightDp().dp)
+                    ) {
+                        CurrentTab()
+                    }
                 }
             )
         }
@@ -75,7 +84,7 @@ fun CustomNavigationBar(
     NavigationBar(
         modifier = Modifier.height(64.dp),
         containerColor =MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface
+        contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
         // Tab navigation items for HomeTab
         TabNavigationItem(homeTab)
@@ -111,8 +120,8 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
 @Composable
 private fun RowScope.CustomNavigationItem(onNavigate: () -> Unit) {
     NavigationBarItem(
-        selected = false, // This is not a tab, so it's never "selected"
-        onClick = { onNavigate() }, // Trigger navigation callback
+        selected = false,
+        onClick = { onNavigate() },
         icon = {
             Icon(painterResource(Res.drawable.ic_plus), contentDescription = "New Screen") // Custom icon
         }

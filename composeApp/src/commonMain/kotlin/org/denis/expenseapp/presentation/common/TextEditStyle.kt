@@ -1,4 +1,4 @@
-package org.denis.expenseapp.presentation.theme
+package org.denis.expenseapp.presentation.common
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -113,9 +113,8 @@ fun CurrencyInputField(
         keyboardActions = KeyboardActions(onDone = {
             keyboardController?.hide()
             onImeAction()
-        }
-        )
-
+        })
     )
+
 }
 

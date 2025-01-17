@@ -5,8 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ButtonDefaults
@@ -19,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import expenseapp.composeapp.generated.resources.Res
 import expenseapp.composeapp.generated.resources.add_screen_amount
@@ -29,17 +33,17 @@ import expenseapp.composeapp.generated.resources.add_screen_description
 import expenseapp.composeapp.generated.resources.add_screen_description_hint
 import expenseapp.composeapp.generated.resources.add_screen_save_button
 import expenseapp.composeapp.generated.resources.add_screen_title
+import org.denis.expenseapp.presentation.common.BodyTextMedium
+import org.denis.expenseapp.presentation.common.ButtonPrimary
+import org.denis.expenseapp.presentation.common.CurrencyInputField
+import org.denis.expenseapp.presentation.common.MainBodyStyle
+import org.denis.expenseapp.presentation.common.TextEditField
 import org.denis.expenseapp.presentation.common.VisibleDatePicker
 import org.denis.expenseapp.presentation.common.topBars.BackButtonTopBar
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseUiAction
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseUiState
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseViewModel
 import org.denis.expenseapp.presentation.model.addScreen.CategoryUiModel
-import org.denis.expenseapp.presentation.theme.ButtonPrimary
-import org.denis.expenseapp.presentation.theme.CurrencyInputField
-import org.denis.expenseapp.presentation.theme.MainBodyStyle
-import org.denis.expenseapp.presentation.theme.TextEditField
-import org.denis.expenseapp.presentation.theme.TextEditTitle
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -63,7 +67,8 @@ class AddScreen : Screen {
                 AddScreenBody(
                     uiState = uiState,
                     onAction = viewModel::onSaveIncomePressed,
-                    paddingValues = paddingValues
+                    paddingValues = paddingValues,
+                    navigator = navigator
                 )
             }
         )
@@ -73,7 +78,8 @@ class AddScreen : Screen {
     private fun AddScreenBody(
         uiState: AddExpenseUiState,
         onAction: (AddExpenseUiAction) -> Unit,
-        paddingValues: PaddingValues
+        paddingValues: PaddingValues,
+        navigator: Navigator
     ) {
         MainBodyStyle(
             paddingValues = paddingValues
@@ -84,7 +90,9 @@ class AddScreen : Screen {
                     uiState = uiState,
                     onAction = onAction
                 )
-
+                is AddExpenseUiState.RegisterCompleted -> {
+                    navigator.pop()
+                }
                 is AddExpenseUiState.Error -> ErrorState()
             }
         }
@@ -109,59 +117,77 @@ class AddScreen : Screen {
         uiState: AddExpenseUiState.ExpenseUiState,
         onAction: (AddExpenseUiAction) -> Unit
     ) {
-        Column(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                LazyColumn(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    item {
+                        // Date Field
+                        BodyTextMedium(text = stringResource(Res.string.add_screen_date))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        VisibleDatePicker(
+                            onDateSelected = { onAction(AddExpenseUiAction.SelectDate(it)) }
+                        )
+                    }
 
-            // Date Field
-            TextEditTitle(text = stringResource(Res.string.add_screen_date))
-            VisibleDatePicker(
-                onDateSelected = { onAction(AddExpenseUiAction.SelectDate(it)) }
-            )
+                    item {
+                        // Amount Field
+                        BodyTextMedium(text = stringResource(Res.string.add_screen_amount))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        CurrencyInputField(
+                            value = uiState.amount,
+                            onValueChange = { onAction(AddExpenseUiAction.UpdateAmount(it)) },
+                            label = stringResource(Res.string.add_screen_amount_hint),
+                            modifier = Modifier.fillMaxWidth(),
+                            onImeAction = {}
+                        )
+                    }
 
-            // Description Field
-            TextEditTitle(text = stringResource(Res.string.add_screen_description))
-            TextEditField(
-                value = uiState.description,
-                onValueChange = { onAction(AddExpenseUiAction.UpdateDescription(it)) },
-                label = stringResource(Res.string.add_screen_description_hint),
-                modifier = Modifier.fillMaxWidth(),
-                onImeAction = {}
-            )
+                    item {
+                        // Description Field
+                        BodyTextMedium(text = stringResource(Res.string.add_screen_description))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        TextEditField(
+                            value = uiState.description,
+                            onValueChange = { onAction(AddExpenseUiAction.UpdateDescription(it)) },
+                            label = stringResource(Res.string.add_screen_description_hint),
+                            modifier = Modifier.fillMaxWidth(),
+                            onImeAction = {}
+                        )
+                    }
 
-            // Amount Field
-            TextEditTitle(text = stringResource(Res.string.add_screen_amount))
-            CurrencyInputField(
-                value = uiState.amount,
-                onValueChange = { onAction(AddExpenseUiAction.UpdateAmount(it)) },
-                label = stringResource(Res.string.add_screen_amount_hint),
-                modifier = Modifier.fillMaxWidth(),
-                onImeAction = {}
-            )
-
-            TextEditTitle(text = stringResource(Res.string.add_screen_category))
-            CategoriesList(
-                categories = uiState.categories,
-                selectedCategory = uiState.selectedCategory,
-                onCategorySelected = { category ->
-                    onAction(AddExpenseUiAction.SelectCategory(category)) // Pass the CategoryUiModel
+                    item {
+                        BodyTextMedium(text = stringResource(Res.string.add_screen_category))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        CategoriesList(
+                            categories = uiState.categories,
+                            selectedCategory = uiState.selectedCategory,
+                            onCategorySelected = { category ->
+                                onAction(AddExpenseUiAction.SelectCategory(category)) // Pass the CategoryUiModel
+                            }
+                        )
+                    }
                 }
-            )
 
-            Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            // Save Button
-            ButtonPrimary(
-                text = stringResource(Res.string.add_screen_save_button),
-                onClick = { onAction(AddExpenseUiAction.SaveExpense) },
-                modifier = Modifier.fillMaxWidth()
-            )
+                // Save Button
+                ButtonPrimary(
+                    text = stringResource(Res.string.add_screen_save_button),
+                    onClick = { onAction(AddExpenseUiAction.SaveExpense) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
-
 
     @Composable
     fun CategoriesList(

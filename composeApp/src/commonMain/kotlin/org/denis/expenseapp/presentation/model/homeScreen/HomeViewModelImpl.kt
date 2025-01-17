@@ -39,7 +39,7 @@ class HomeViewModelImpl(
 
             ExpenseUiModel(
                 id = expense.id!!,
-                amount = expense.amount.toString(),
+                amount = "${expense.amount} $",
                 date = expense.date.toString(),
                 iconResId = category.icon,
                 categoryName = category.descriptionResId

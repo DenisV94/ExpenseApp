@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import expenseapp.composeapp.generated.resources.Res
-import expenseapp.composeapp.generated.resources.montserrat_bold
 import expenseapp.composeapp.generated.resources.montserrat_medium
 import org.jetbrains.compose.resources.Font
 
@@ -51,15 +50,14 @@ fun AppTheme(
             error = Color(0xFFFF6B6B)
         )
 
-    val fontFamilyMontserratMedium: FontFamily = FontFamily(Font(Res.font.montserrat_medium))
-    val fontFamilyMontserratBold: FontFamily = FontFamily(Font(Res.font.montserrat_bold))
+    val fontFamilyMontserratMedium = FontFamily(Font(Res.font.montserrat_medium))
 
     val typography = Typography(
         bodyLarge = TextStyle(
             fontWeight = FontWeight(700),
             fontSize = 18.sp,
             color = Color.Black,
-            fontFamily = fontFamilyMontserratBold
+            fontFamily = fontFamilyMontserratMedium
         ),
         bodyMedium = TextStyle(
             fontWeight = FontWeight(500),

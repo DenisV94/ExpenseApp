@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Base categories -->
+    <string name="home_screen_title">Overview</string>
+    <string name="home_screen_my_expenses">My expenses</string>
+    <string name="home_screen_no_expenses">No expenses</string>
+
     <!--Add expense -->
     <string name="add_screen_title">Add expense</string>
     <string name="add_screen_description">Description</string>
@@ -7,9 +12,12 @@
     <string name="add_screen_date">Select date</string>
     <string name="add_screen_category">Select category</string>
     <string name="add_screen_save_button">Register</string>
-    <!-- Hints for text edit screens -->
     <string name="add_screen_description_hint">Enter description</string>
-    <string name="add_screen_amount_hint">Enter amount</string>
+    <string name="add_screen_amount_hint">Enter amount $</string>
+
+    <!--Details expense -->
+    <string name="detials_screen_title">Details</string>
+    <string name="detials_screen_category">Expense category</string>
 
     <!--Base categories -->
     <string name="category_food">Food</string>

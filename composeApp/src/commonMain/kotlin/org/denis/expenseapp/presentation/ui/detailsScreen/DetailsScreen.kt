@@ -1,6 +1,5 @@
 package org.denis.expenseapp.presentation.ui.detailsScreen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -20,17 +21,17 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import expenseapp.composeapp.generated.resources.Res
 import expenseapp.composeapp.generated.resources.add_screen_amount
-import expenseapp.composeapp.generated.resources.add_screen_category
 import expenseapp.composeapp.generated.resources.add_screen_date
 import expenseapp.composeapp.generated.resources.add_screen_description
-import expenseapp.composeapp.generated.resources.add_screen_title
+import expenseapp.composeapp.generated.resources.detials_screen_category
+import expenseapp.composeapp.generated.resources.detials_screen_title
+import org.denis.expenseapp.presentation.common.BodyTextLarge
+import org.denis.expenseapp.presentation.common.BodyTextMedium
+import org.denis.expenseapp.presentation.common.MainBodyStyle
 import org.denis.expenseapp.presentation.common.topBars.BackButtonTopBar
 import org.denis.expenseapp.presentation.model.detailsScreen.DetailsUiModel
 import org.denis.expenseapp.presentation.model.detailsScreen.DetailsUiState
 import org.denis.expenseapp.presentation.model.detailsScreen.DetailsViewModel
-import org.denis.expenseapp.presentation.theme.BodyTextBold
-import org.denis.expenseapp.presentation.theme.MainBodyStyle
-import org.denis.expenseapp.presentation.theme.TextEditTitle
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -52,7 +53,7 @@ data class DetailsScreen(val expenseId: Long) : Screen {
         Scaffold(
             topBar = {
                 BackButtonTopBar(
-                    title = stringResource(Res.string.add_screen_title),
+                    title = stringResource(Res.string.detials_screen_title),
                     onBackButtonPressed = { navigator.pop() }
                 )
             },
@@ -96,29 +97,30 @@ data class DetailsScreen(val expenseId: Long) : Screen {
         ) {
             // Category Field
             Row {
-                Image(
+                Icon(
                     modifier = Modifier.size(45.dp).padding(end = 16.dp),
+                    tint = MaterialTheme.colorScheme.primary,
                     painter = painterResource(uiState.iconResId),
                     contentDescription = "Image category"
                 )
 
                 Column {
-                    TextEditTitle(text = stringResource(Res.string.add_screen_category))
-                    BodyTextBold(stringResource(uiState.categoryName))
+                    BodyTextLarge(text = stringResource(Res.string.detials_screen_category))
+                    BodyTextMedium(stringResource(uiState.categoryName))
                 }
             }
 
             // Amount Field
-            TextEditTitle(text = stringResource(Res.string.add_screen_amount))
-            BodyTextBold(uiState.amount)
+            BodyTextLarge(text = stringResource(Res.string.add_screen_amount))
+            BodyTextMedium(uiState.amount)
 
             // Date Field
-            TextEditTitle(text = stringResource(Res.string.add_screen_date))
-            BodyTextBold(uiState.date)
+            BodyTextLarge(text = stringResource(Res.string.add_screen_date))
+            BodyTextMedium(uiState.date)
 
             // Description Field
-            TextEditTitle(text = stringResource(Res.string.add_screen_description))
-            BodyTextBold(uiState.description)
+            BodyTextLarge(text = stringResource(Res.string.add_screen_description))
+            BodyTextMedium(uiState.description)
         }
     }
 

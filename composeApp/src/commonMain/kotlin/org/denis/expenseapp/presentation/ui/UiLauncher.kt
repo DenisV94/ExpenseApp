@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.transitions.SlideTransition
 import org.denis.expenseapp.presentation.theme.AppTheme
 import org.denis.expenseapp.presentation.ui.homeScreen.HomeTabNavigatorScreen
 import org.denis.expenseapp.presentation.ui.splashScreen.SplashScreen
@@ -19,7 +20,9 @@ fun UILauncher() {
         if (showSplashScreen) {
             SplashScreen(onTimeout = { showSplashScreen = false })
         } else {
-            Navigator(HomeTabNavigatorScreen())
+            Navigator(HomeTabNavigatorScreen()){ navigator ->
+                SlideTransition(navigator = navigator)
+            }
         }
     }
 }

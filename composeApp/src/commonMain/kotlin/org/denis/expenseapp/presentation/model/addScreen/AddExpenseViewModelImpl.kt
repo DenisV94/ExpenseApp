@@ -90,9 +90,9 @@ class AddExpenseViewModelImpl(
             viewModelScope.launch {
                 val result = repository.addExpense(expense)
                 if (result.isRight()) {
-
+                    _uiState.value = AddExpenseUiState.RegisterCompleted
                 } else {
-                    TODO()
+                    _uiState.value = AddExpenseUiState.Error
                 }
             }
         }

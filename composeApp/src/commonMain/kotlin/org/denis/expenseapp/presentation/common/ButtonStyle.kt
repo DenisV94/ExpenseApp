@@ -1,4 +1,4 @@
-package org.denis.expenseapp.presentation.theme
+package org.denis.expenseapp.presentation.common
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
