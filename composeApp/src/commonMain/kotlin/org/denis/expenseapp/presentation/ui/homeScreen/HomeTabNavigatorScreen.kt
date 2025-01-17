@@ -1,64 +1,59 @@
 package org.denis.expenseapp.presentation.ui.homeScreen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import org.denis.expenseapp.presentation.ui.homeScreen.tabs.homeTab.HomeTab
 
-internal class HomeTabNavigatorScreen : Screen {
-    @Composable
-    override fun Content() {
-        // Initialize the list of tabs
-        val tabs = listOf(HomeTab)
+@Composable
+fun HomeTabNavigatorScreen() {
+    var isVisible by remember { mutableStateOf(true) } // Visibility state for the bottom navigation bar
 
-        // Wrap with TabNavigator to initialize it with a default tab
-        TabNavigator(tab = HomeTab) {
-            // Observe the current tab from the TabNavigator
-            val tabNavigator = LocalTabNavigator.current
-            val isCurrentTabInTabs = tabs.any { it.key == tabNavigator.current.key }
+    // Initialize the HomeTab with the visibility callback
+    val homeTab = remember {
+        HomeTab(onNavigator = { isVisible = it })
+    }
 
-            Scaffold(
-                content = {
-                    // Adjust padding based on whether the NavigationBar is visible
-                    Column(
-                        modifier = Modifier.padding(
-                            bottom = if (isCurrentTabInTabs) 58.dp else 0.dp
-                        )
-                    ) {
-                        CurrentTab() // Render the content of the current tab
-                    }
-                },
-                bottomBar = {
-                    // Conditionally show the NavigationBar based on the current tab
-                    if (isCurrentTabInTabs) {
-                        NavigationBar(
-                            containerColor = MaterialTheme.colorScheme.background,
-                            modifier = Modifier.height(58.dp)
-                        ) {
-                            tabs.forEach { tab ->
-                                TabNavigationItem(tab)
-                            }
-                        }
+    // Use TabNavigator to manage tab navigation
+    TabNavigator(tab = homeTab) {
+        val tabNavigator = LocalTabNavigator.current
+
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = {
+                // Animate visibility of the bottom navigation bar
+                AnimatedVisibility(
+                    visible = isVisible,
+                    enter = slideInVertically { it },
+                    exit = slideOutVertically { it }
+                ) {
+                    BottomNavigation {
+                        TabNavigationItem(homeTab)
                     }
                 }
-            )
-        }
+            },
+            content = {
+                // Display the currently selected tab's content
+                CurrentTab()
+            }
+        )
     }
 }
 
@@ -66,16 +61,19 @@ internal class HomeTabNavigatorScreen : Screen {
 private fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
 
-    NavigationBarItem(
-        modifier = Modifier.background(Color.Gray),
-        selected = tabNavigator.current.key == tab.key,
-        onClick = { tabNavigator.current = tab }, // Update the tab
+    BottomNavigationItem(
+        selected = tabNavigator.current == tab,
+        onClick = { tabNavigator.current = tab }, // Switch to the selected tab
         icon = {
-            Icon(
-                painter = tab.options.icon!!,
-                contentDescription = tab.options.title
-            )
+            tab.options.icon?.let { icon ->
+                Icon(
+                    painter = icon,
+                    contentDescription = tab.options.title
+                )
+            }
         },
-        alwaysShowLabel = false
+        label = {
+            Text(text = tab.options.title)
+        }
     )
 }

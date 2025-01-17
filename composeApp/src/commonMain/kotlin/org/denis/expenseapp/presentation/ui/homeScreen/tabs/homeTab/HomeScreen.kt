@@ -39,7 +39,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-internal class HomeScreen : Screen {
+data object HomeScreen : Screen  {
     @Composable
     override fun Content() {
         val viewModel = koinViewModel<HomeViewModel>()

@@ -3,13 +3,17 @@ package org.denis.expenseapp.presentation.ui.homeScreen.tabs.homeTab
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import cafe.adriel.voyager.transitions.SlideTransition
 
-object HomeTab : Tab {
+class HomeTab(
+    val onNavigator : (isRoot : Boolean) -> Unit,
+) : Tab {
 
     override val options: TabOptions
         @Composable
@@ -27,6 +31,11 @@ object HomeTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(HomeScreen())
+        Navigator(screen = HomeScreen) { navigator ->
+            LaunchedEffect(navigator.lastItem){
+                onNavigator(navigator.lastItem is HomeScreen)
+            }
+            SlideTransition(navigator = navigator)
+        }
     }
 }

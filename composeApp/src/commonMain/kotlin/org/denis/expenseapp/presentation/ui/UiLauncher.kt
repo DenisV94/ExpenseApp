@@ -19,7 +19,7 @@ fun UILauncher() {
         if (showSplashScreen) {
             SplashScreen(onTimeout = { showSplashScreen = false })
         } else {
-            Navigator(HomeTabNavigatorScreen())
+           HomeTabNavigatorScreen()
         }
     }
 }
