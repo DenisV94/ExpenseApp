@@ -11,18 +11,20 @@ class ExpenseRepositoryImpl(
     private val database: LocalExpenseData
 ) : ExpenseRepository {
 
-    override  suspend fun getAllExpenses(): Either<EitherResult.RepositoryError, List<Expense>> {
+    override suspend fun getAllExpenses(): Either<EitherResult.RepositoryError, List<Expense>> {
         return try {
             when (val result = database.getExpenses()) {
                 is Either.Right -> {
                     Either.Right(result.value)
                 }
+
                 is Either.Left -> Either.Left(EitherResult.RepositoryError.InternalError)
             }
         } catch (e: Exception) {
             Either.Left(EitherResult.RepositoryError.InternalError)
         }
     }
+
     override suspend fun getExpensesByDateRange(
         startDate: LocalDate,
         endDate: LocalDate
@@ -42,6 +44,7 @@ class ExpenseRepositoryImpl(
             Either.Left(EitherResult.RepositoryError.InternalError)
         }
     }
+
     override suspend fun updateExpense(expense: Expense): Either<EitherResult.RepositoryError, EitherResult.Success> {
         TODO("Not yet implemented")
     }

@@ -39,7 +39,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-data object HomeScreen : Screen  {
+data object HomeScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel = koinViewModel<HomeViewModel>()
@@ -60,9 +60,6 @@ data object HomeScreen : Screen  {
                 HomeScreenBody(
                     paddingValues = paddingValues,
                     uiState = uiState,
-                    onClick = {
-                        navigator.push(AddScreen())
-                    },
                     onItemClick = { expense ->
                         navigator.push(DetailsScreen(expense.id))
                     }
@@ -74,7 +71,7 @@ data object HomeScreen : Screen  {
     @Composable
     fun HomeScreenBody(
         uiState: HomeUiState,
-        onClick: () -> Unit,
+
         onItemClick: (ExpenseUiModel) -> Unit,
         paddingValues: PaddingValues
     ) {
@@ -82,22 +79,16 @@ data object HomeScreen : Screen  {
             paddingValues = paddingValues,
             content = {
                 Column {
-                    ButtonPrimary(
-                        text = "Add Expense",
-                        onClick = {
-                            onClick()
-                        }
-                    )
-
                     Spacer(modifier = Modifier.height(16.dp))
                     when (uiState) {
                         is HomeUiState.Loading -> {}
-                        is HomeUiState.Success ->{
+                        is HomeUiState.Success -> {
                             ExpenseList(
                                 expenses = uiState.userExpenses,
                                 onItemClick = onItemClick
                             )
                         }
+
                         is HomeUiState.Error -> ErrorState()
                     }
                 }
@@ -112,7 +103,7 @@ data object HomeScreen : Screen  {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(expenses) { expense ->
                 ExpenseItem(
-                    expense=expense,
+                    expense = expense,
                     onClick = onItemClick
                 )
             }

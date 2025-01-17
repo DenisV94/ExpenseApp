@@ -37,7 +37,7 @@ fun VisibleDatePicker(
         maxDate = maxDate,
         yearsRange = yearsRange,
         selectorProperties = WheelPickerDefaults.selectorProperties(),
-        dateTextStyle= MaterialTheme.typography.bodyMedium,
+        dateTextStyle = MaterialTheme.typography.bodyMedium,
         onDateChangeListener = { snappedDate ->
             selectedDate = snappedDate
             onDateSelected(snappedDate)

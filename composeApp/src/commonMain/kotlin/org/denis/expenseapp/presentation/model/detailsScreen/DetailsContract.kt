@@ -1,14 +1,11 @@
 package org.denis.expenseapp.presentation.model.detailsScreen
 
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import org.denis.expenseapp.domain.models.Expense
-
 sealed class DetailsUiState {
     data object Loading : DetailsUiState()
     data class Success(
         val detailsExpense: DetailsUiModel
     ) : DetailsUiState()
+
     data object Error : DetailsUiState()
 }
 

@@ -1,7 +1,6 @@
 package org.denis.expenseapp.domain.models
 
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
 
 data class Expense(
     val id: Long? = null,

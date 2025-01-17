@@ -84,6 +84,7 @@ class AddScreen : Screen {
                     uiState = uiState,
                     onAction = onAction
                 )
+
                 is AddExpenseUiState.Error -> ErrorState()
             }
         }

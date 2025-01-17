@@ -34,7 +34,8 @@ class HomeViewModelImpl(
     ): List<ExpenseUiModel> {
         return expenses.map { expense ->
             // Find the category based on the ID
-            val category = categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
+            val category =
+                categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
 
             ExpenseUiModel(
                 id = expense.id!!,

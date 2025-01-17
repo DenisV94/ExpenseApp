@@ -4,7 +4,6 @@ import app.cash.sqldelight.db.SqlDriver
 import arrow.core.Either
 import com.denis.expenseapp.Database
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
 import org.denis.expenseapp.domain.EitherResult
 import org.denis.expenseapp.domain.models.Expense
 
@@ -51,7 +50,8 @@ class LocalExpenseDataImpl(driver: SqlDriver) : LocalExpenseData {
 
     override suspend fun updateExpense(expense: Expense): Either<EitherResult.LocalDatabaseError, EitherResult.Success> {
         return executeQuery {
-            val expenseId = expense.id ?: throw IllegalArgumentException("Expense ID must not be null for updates.")
+            val expenseId = expense.id
+                ?: throw IllegalArgumentException("Expense ID must not be null for updates.")
             db.expenseQueries.updateExpense(
                 description = expense.description,
                 amount = expense.amount,

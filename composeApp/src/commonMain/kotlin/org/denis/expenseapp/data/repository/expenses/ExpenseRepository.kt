@@ -23,6 +23,6 @@ interface ExpenseRepository {
 
     suspend fun deleteExpense(id: String): Either<EitherResult.RepositoryError, EitherResult.Success>
 
-    suspend fun getCategoryList():  List<ExpenseCategory>
+    suspend fun getCategoryList(): List<ExpenseCategory>
 
 }

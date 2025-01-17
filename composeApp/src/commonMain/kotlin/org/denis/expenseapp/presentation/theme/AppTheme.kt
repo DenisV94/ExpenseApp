@@ -64,7 +64,7 @@ fun AppTheme(
         bodyMedium = TextStyle(
             fontWeight = FontWeight(500),
             fontSize = 16.sp,
-            color =Color.Black,
+            color = Color.Black,
             fontFamily = fontFamilyMontserratMedium
         ),
         labelLarge = TextStyle(

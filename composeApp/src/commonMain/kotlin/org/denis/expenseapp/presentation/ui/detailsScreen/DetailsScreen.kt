@@ -35,7 +35,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
-data class DetailsScreen(val expenseId:Long) : Screen {
+data class DetailsScreen(val expenseId: Long) : Screen {
     @Composable
     override fun Content() {
         val viewModel = koinViewModel<DetailsViewModel>()
@@ -78,6 +78,7 @@ data class DetailsScreen(val expenseId:Long) : Screen {
                 is DetailsUiState.Success -> ExpenseForm(
                     uiState = uiState.detailsExpense
                 )
+
                 is DetailsUiState.Error -> ErrorState()
             }
         }
@@ -103,7 +104,7 @@ data class DetailsScreen(val expenseId:Long) : Screen {
 
                 Column {
                     TextEditTitle(text = stringResource(Res.string.add_screen_category))
-                    BodyTextBold(stringResource( uiState.categoryName))
+                    BodyTextBold(stringResource(uiState.categoryName))
                 }
             }
 

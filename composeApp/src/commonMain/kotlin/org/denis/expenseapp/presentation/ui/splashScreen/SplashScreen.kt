@@ -47,8 +47,8 @@ private fun SplashScreenScreen() {
                 painter = painter,
                 contentDescription = "images",
             )*/
-           BodyTextBold(
-                text ="Expense App",
+            BodyTextBold(
+                text = "Expense App",
             )
         }
     }

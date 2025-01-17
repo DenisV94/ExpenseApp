@@ -2,11 +2,11 @@ package org.denis.expenseapp.presentation.theme
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldColors
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,69 +20,69 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextEditField(
-        value: String,
-        onValueChange: (String) -> Unit,
-        label: String  = "",
-        modifier: Modifier = Modifier,
-        leadingIcon: @Composable (() -> Unit)? = null,
-        shape: Shape = MaterialTheme.shapes.medium,
-        backgroundColors: TextFieldColors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent
-        ),
-        onImeAction: () -> Unit,
-        fontColor: Color = MaterialTheme.colors.onSurface,
-        textAlign: TextAlign = TextAlign.Start,
-        keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Done // Set to Done or another appropriate action
-        )
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String = "",
+    modifier: Modifier = Modifier,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    shape: Shape = MaterialTheme.shapes.medium,
+    backgroundColors: TextFieldColors = TextFieldDefaults.colors(
+        disabledContainerColor = MaterialTheme.colorScheme.surface,
+        unfocusedContainerColor = Color.Transparent,
+        focusedContainerColor = Color.Transparent
+    ),
+    onImeAction: () -> Unit,
+    fontColor: Color = MaterialTheme.colorScheme.onSurface,
+    textAlign: TextAlign = TextAlign.Start,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(
+        imeAction = ImeAction.Done // Set to Done or another appropriate action
+    )
 ) {
-        val keyboardController = LocalSoftwareKeyboardController.current
-        OutlinedTextField(
-            value = value,
-            colors = backgroundColors,
-            shape = shape,
-            onValueChange = onValueChange,
-            modifier = modifier,
-            label = {
-                Text(
-                    text = label,
-                    textAlign = textAlign,
-                    color = fontColor.copy(alpha = 0.5f),
-                    style = MaterialTheme.typography.body1.copy(fontSize = 16.sp)
-                )
-            },
-            leadingIcon = leadingIcon,
-            textStyle = MaterialTheme.typography.body1.copy(
-                color = fontColor,
-                fontSize = 16.sp
-            ),
-            keyboardOptions = keyboardOptions,
-            keyboardActions = KeyboardActions(onDone = {
-                keyboardController?.hide()
-                onImeAction()
-            }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    OutlinedTextField(
+        value = value,
+        colors = backgroundColors,
+        shape = shape,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        label = {
+            Text(
+                text = label,
+                textAlign = textAlign,
+                color = fontColor.copy(alpha = 0.5f),
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp)
             )
-
+        },
+        leadingIcon = leadingIcon,
+        textStyle = MaterialTheme.typography.bodyMedium.copy(
+            color = fontColor,
+            fontSize = 16.sp
+        ),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = KeyboardActions(onDone = {
+            keyboardController?.hide()
+            onImeAction()
+        }
         )
-    }
+
+    )
+}
 
 @Composable
 fun CurrencyInputField(
     value: String,
     onValueChange: (String) -> Unit,
-    label: String  = "",
+    label: String = "",
     modifier: Modifier = Modifier,
     leadingIcon: @Composable (() -> Unit)? = null,
     shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColors: TextFieldColors = TextFieldDefaults.textFieldColors(
-        backgroundColor = MaterialTheme.colors.surface,
-        unfocusedIndicatorColor = Color.Transparent,
-        focusedIndicatorColor = Color.Transparent
+    backgroundColors: TextFieldColors = TextFieldDefaults.colors(
+        disabledContainerColor = MaterialTheme.colorScheme.surface,
+        unfocusedContainerColor = Color.Transparent,
+        focusedContainerColor = Color.Transparent
     ),
     onImeAction: () -> Unit,
-    fontColor: Color = MaterialTheme.colors.onSurface,
+    fontColor: Color = MaterialTheme.colorScheme.onSurface,
     textAlign: TextAlign = TextAlign.Start,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(
         imeAction = ImeAction.Done,
@@ -101,11 +101,11 @@ fun CurrencyInputField(
                 text = label,
                 textAlign = textAlign,
                 color = fontColor.copy(alpha = 0.5f),
-                style = MaterialTheme.typography.body1.copy(fontSize = 16.sp)
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp)
             )
         },
         leadingIcon = leadingIcon,
-        textStyle = MaterialTheme.typography.body1.copy(
+        textStyle = MaterialTheme.typography.bodyMedium.copy(
             color = fontColor,
             fontSize = 16.sp
         ),

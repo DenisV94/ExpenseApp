@@ -63,11 +63,11 @@ kotlin {
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.tab.navigator)
             implementation(libs.voyager.bottom.sheet.navigator)
-            implementation("cafe.adriel.voyager:voyager-koin:1.1.0-beta03")
+            implementation(libs.voyager.koin)
 
             // Datetime
             implementation(libs.kotlinx.datetime)
-            implementation("network.chaintech:kmp-date-time-picker:1.0.7")
+            implementation(libs.kmp.date.time.picker)
 
         }
 

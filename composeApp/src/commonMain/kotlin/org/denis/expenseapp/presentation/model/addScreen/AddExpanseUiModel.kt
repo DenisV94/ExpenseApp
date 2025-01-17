@@ -1,7 +1,5 @@
 package org.denis.expenseapp.presentation.model.addScreen
 
-import expenseapp.composeapp.generated.resources.Res
-import expenseapp.composeapp.generated.resources.ic_arrow_back
 import org.denis.expenseapp.domain.models.ExpenseCategory
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource

@@ -12,7 +12,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import cafe.adriel.voyager.transitions.SlideTransition
 
 class HomeTab(
-    val onNavigator : (isRoot : Boolean) -> Unit,
+    val onNavigator: (isRoot: Boolean) -> Unit,
 ) : Tab {
 
     override val options: TabOptions
@@ -32,7 +32,7 @@ class HomeTab(
     @Composable
     override fun Content() {
         Navigator(screen = HomeScreen) { navigator ->
-            LaunchedEffect(navigator.lastItem){
+            LaunchedEffect(navigator.lastItem) {
                 onNavigator(navigator.lastItem is HomeScreen)
             }
             SlideTransition(navigator = navigator)
