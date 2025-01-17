@@ -18,82 +18,76 @@ class AddExpenseViewModelImpl(
     override val uiState: StateFlow<AddExpenseUiState> = _uiState
 
     init {
-        viewModelScope.launch {
-            val categories = repository.getCategoryList().map { it.toCategoryUiModel() }
-            _uiState.value = AddExpenseUiState.ExpenseUiState(
-                description = "",
-                amount = "",
-                selectedCategory = categories.first(),
-                date = LocalDate.now(),
-                categories = categories
-            )
-        }
+        loadInitialState()
     }
 
     override fun onSaveIncomePressed(action: AddExpenseUiAction) {
         when (action) {
-            is AddExpenseUiAction.UpdateDescription -> updateDescription(action.description)
-            is AddExpenseUiAction.UpdateAmount -> updateAmount(action.amount)
-            is AddExpenseUiAction.SelectCategory -> selectCategory(action.category)
-            is AddExpenseUiAction.SelectDate -> selectDate(action.date)
+            is AddExpenseUiAction.UpdateDescription -> updateUiState { it.copy(description = action.description) }
+            is AddExpenseUiAction.UpdateAmount -> updateUiState { it.copy(amount = action.amount) }
+            is AddExpenseUiAction.SelectCategory -> updateUiState { it.copy(selectedCategory = action.category) }
+            is AddExpenseUiAction.SelectDate -> updateUiState { it.copy(date = action.date) }
             is AddExpenseUiAction.SaveExpense -> saveExpense()
+            is AddExpenseUiAction.Retry -> loadInitialState()
         }
     }
 
-    private fun updateDescription(description: String) {
-        _uiState.update { currentState ->
-            if (currentState is AddExpenseUiState.ExpenseUiState) {
-                currentState.copy(description = description)
-            } else currentState
-        }
-    }
-
-    private fun updateAmount(amount: String) {
-        _uiState.update { currentState ->
-            if (currentState is AddExpenseUiState.ExpenseUiState) {
-                currentState.copy(amount = amount)
-            } else currentState
-        }
-    }
-
-    private fun selectCategory(category: CategoryUiModel) {
-        _uiState.update { currentState ->
-            if (currentState is AddExpenseUiState.ExpenseUiState) {
-                currentState.copy(selectedCategory = category)
-            } else currentState
-        }
-    }
-
-    private fun selectDate(date: LocalDate) {
-        _uiState.update { currentState ->
-            if (currentState is AddExpenseUiState.ExpenseUiState) {
-                currentState.copy(date = date)
-            } else currentState
+    private fun loadInitialState() {
+        viewModelScope.launch {
+            val categories = repository.getCategoryList().map { it.toCategoryUiModel() }
+            if (categories.isNotEmpty()) {
+                _uiState.value = AddExpenseUiState.ExpenseUiState(
+                    description = "",
+                    amount = "",
+                    selectedCategory = categories.first(),
+                    date = LocalDate.now(),
+                    categories = categories
+                )
+            } else {
+                _uiState.value = AddExpenseUiState.Error
+            }
         }
     }
 
     private fun saveExpense() {
-        val currentState = _uiState.value
+        val currentState = (_uiState.value as? AddExpenseUiState.ExpenseUiState) ?: return
 
-        if (currentState is AddExpenseUiState.ExpenseUiState) {
-            if (currentState.description.isBlank() || currentState.amount.isBlank()) {
-                return
-            }
+        if (!isInputValid(currentState)) {
+            _uiState.update { AddExpenseUiState.Error }
+            return
+        }
 
-            val expense = Expense(
-                id = 0, // Assuming 0 for new expense, replace with actual logic
-                description = currentState.description,
-                amount = currentState.amount.toLong(),
-                category = currentState.selectedCategory.id,
-                date = currentState.date
-            )
-            viewModelScope.launch {
-                val result = repository.addExpense(expense)
+        val expense = Expense(
+            id = 0, // Replace with proper ID logic
+            description = currentState.description,
+            amount = currentState.amount.toLong(),
+            category = currentState.selectedCategory.id,
+            date = currentState.date
+        )
+
+        viewModelScope.launch {
+            _uiState.update { AddExpenseUiState.Loading }
+            val result = repository.addExpense(expense)
+            _uiState.update {
                 if (result.isRight()) {
-                    _uiState.value = AddExpenseUiState.RegisterCompleted
+                    AddExpenseUiState.RegisterCompleted
                 } else {
-                    _uiState.value = AddExpenseUiState.Error
+                    AddExpenseUiState.Error
                 }
+            }
+        }
+    }
+
+    private fun isInputValid(state: AddExpenseUiState.ExpenseUiState): Boolean {
+        return state.description.isNotBlank() && state.amount.isNotBlank() && state.amount.toLongOrNull() != null
+    }
+
+    private fun updateUiState(transform: (AddExpenseUiState.ExpenseUiState) -> AddExpenseUiState.ExpenseUiState) {
+        _uiState.update { currentState ->
+            if (currentState is AddExpenseUiState.ExpenseUiState) {
+                transform(currentState)
+            } else {
+                currentState
             }
         }
     }

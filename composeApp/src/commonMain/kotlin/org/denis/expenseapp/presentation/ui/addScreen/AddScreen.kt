@@ -13,11 +13,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
@@ -31,11 +33,15 @@ import expenseapp.composeapp.generated.resources.add_screen_category
 import expenseapp.composeapp.generated.resources.add_screen_date
 import expenseapp.composeapp.generated.resources.add_screen_description
 import expenseapp.composeapp.generated.resources.add_screen_description_hint
+import expenseapp.composeapp.generated.resources.add_screen_error_empty_amount
 import expenseapp.composeapp.generated.resources.add_screen_save_button
 import expenseapp.composeapp.generated.resources.add_screen_title
+import expenseapp.composeapp.generated.resources.button_confirmation_basic
+import org.denis.expenseapp.presentation.common.BodyTextLarge
 import org.denis.expenseapp.presentation.common.BodyTextMedium
 import org.denis.expenseapp.presentation.common.ButtonPrimary
 import org.denis.expenseapp.presentation.common.CurrencyInputField
+import org.denis.expenseapp.presentation.common.LoadingState
 import org.denis.expenseapp.presentation.common.MainBodyStyle
 import org.denis.expenseapp.presentation.common.TextEditField
 import org.denis.expenseapp.presentation.common.VisibleDatePicker
@@ -93,22 +99,35 @@ class AddScreen : Screen {
                 is AddExpenseUiState.RegisterCompleted -> {
                     navigator.pop()
                 }
-                is AddExpenseUiState.Error -> ErrorState()
+                is AddExpenseUiState.Error -> ErrorState(
+                    onRetry = { onAction(AddExpenseUiAction.Retry) }
+                )
             }
         }
     }
 
     @Composable
-    private fun LoadingState() {
-        Box(modifier = Modifier.fillMaxWidth()) {
-
-        }
-    }
-
-    @Composable
-    private fun ErrorState() {
-        Box(modifier = Modifier.fillMaxWidth()) {
-
+    private fun ErrorState(onRetry: () -> Unit) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                BodyTextLarge(
+                    text = stringResource(Res.string.add_screen_error_empty_amount)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                ButtonPrimary(
+                    text = stringResource(Res.string.button_confirmation_basic),
+                    onClick = onRetry,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 

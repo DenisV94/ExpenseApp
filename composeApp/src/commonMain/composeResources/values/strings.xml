@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Base categories -->
+    <!--Base strings -->
+    <string name="app_name">ExpenseApp</string>
+    <string name="button_confirmation_basic">Confirm</string>
+
+    <!--Home screen -->
     <string name="home_screen_title">Overview</string>
     <string name="home_screen_my_expenses">My expenses</string>
     <string name="home_screen_no_expenses">No expenses</string>
@@ -14,6 +18,7 @@
     <string name="add_screen_save_button">Register</string>
     <string name="add_screen_description_hint">Enter description</string>
     <string name="add_screen_amount_hint">Enter amount $</string>
+    <string name="add_screen_error_empty_amount">Fill the amount field!</string>
 
     <!--Details expense -->
     <string name="detials_screen_title">Details</string>
