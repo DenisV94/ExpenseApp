@@ -24,8 +24,11 @@ import expenseapp.composeapp.generated.resources.Res
 import expenseapp.composeapp.generated.resources.add_screen_amount
 import expenseapp.composeapp.generated.resources.add_screen_date
 import expenseapp.composeapp.generated.resources.add_screen_description
-import expenseapp.composeapp.generated.resources.detials_screen_category
-import expenseapp.composeapp.generated.resources.detials_screen_title
+import expenseapp.composeapp.generated.resources.details_screen_amount
+import expenseapp.composeapp.generated.resources.details_screen_category
+import expenseapp.composeapp.generated.resources.details_screen_date
+import expenseapp.composeapp.generated.resources.details_screen_description
+import expenseapp.composeapp.generated.resources.details_screen_title
 import org.denis.expenseapp.presentation.common.BodyTextLarge
 import org.denis.expenseapp.presentation.common.BodyTextMedium
 import org.denis.expenseapp.presentation.common.LoadingState
@@ -55,7 +58,7 @@ data class DetailsScreen(val expenseId: Long) : Screen {
         Scaffold(
             topBar = {
                 BackButtonTopBar(
-                    title = stringResource(Res.string.detials_screen_title),
+                    title = stringResource(Res.string.details_screen_title),
                     onBackButtonPressed = { navigator.pop() }
                 )
             },
@@ -108,21 +111,24 @@ data class DetailsScreen(val expenseId: Long) : Screen {
                 )
 
                 Column {
-                    BodyTextLarge(text = stringResource(Res.string.detials_screen_category))
+                    BodyTextLarge(
+                        text = stringResource(Res.string.details_screen_category),
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
                     BodyTextMedium(stringResource(uiState.categoryName))
                 }
             }
 
             // Amount Field
-            BodyTextLarge(text = stringResource(Res.string.add_screen_amount))
+            BodyTextLarge(text = stringResource(Res.string.details_screen_amount))
             BodyTextMedium(uiState.amount)
 
             // Date Field
-            BodyTextLarge(text = stringResource(Res.string.add_screen_date))
+            BodyTextLarge(text = stringResource(Res.string.details_screen_date))
             BodyTextMedium(uiState.date)
 
             // Description Field
-            BodyTextLarge(text = stringResource(Res.string.add_screen_description))
+            BodyTextLarge(text = stringResource(Res.string.details_screen_description))
             BodyTextMedium(uiState.description)
         }
     }

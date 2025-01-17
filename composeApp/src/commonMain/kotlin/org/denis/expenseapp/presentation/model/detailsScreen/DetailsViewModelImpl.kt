@@ -42,7 +42,7 @@ class DetailsViewModelImpl(
         val category = categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
 
         return DetailsUiModel(
-            amount = expense.amount.toString(),
+            amount = "${expense.amount} $",
             description = expense.description,
             date = expense.date.toString(),
             iconResId = category.icon,

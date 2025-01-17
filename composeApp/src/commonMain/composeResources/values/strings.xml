@@ -23,8 +23,11 @@
     <string name="add_screen_success">Successfully added!</string>
 
     <!--Details expense -->
-    <string name="detials_screen_title">Details</string>
-    <string name="detials_screen_category">Expense category</string>
+    <string name="details_screen_title">Details</string>
+    <string name="details_screen_category">Expense category</string>
+    <string name="details_screen_date">Date</string>
+    <string name="details_screen_description">Description</string>
+    <string name="details_screen_amount">Amount</string>
 
     <!--Base categories -->
     <string name="category_food">Food</string>
