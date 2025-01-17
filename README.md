@@ -1,14 +1,25 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+ExpenseApp
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+ExpenseApp is a Kotlin Compose Multiplatform project for managing expenses.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+Features
+•	Add new expenses with details such as date, amount, description, and category.
+•	View a list of all expenses.
+•	Error handling for invalid inputs.
+•	Loading state indication during data processing.
 
+Getting Started:
+Prerequisites
+•	Android Studio 
+•	macOS with an environment for Compose Multiplatform development.
+Refer to the JetBrains Multiplatform Setup Guide:
+https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+Installation
+1.	Clone the repository.
+2.	Open the project in Android Studio.
+3.	Sync the project with Gradle files.
+
+Notes:
+•	Developed on Mac Mini M4 with macOS Secuoia 15.2
+•   Developed on Android Studio Ladybug Feature Drop | 2024.2.2

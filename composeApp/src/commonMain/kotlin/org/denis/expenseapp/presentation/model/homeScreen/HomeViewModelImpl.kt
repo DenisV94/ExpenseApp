@@ -31,13 +31,14 @@ class HomeViewModelImpl(
     private fun composeExpenseUiModelList(
         expenses: List<Expense>,
         categoryList: List<ExpenseCategory>
-    ): List<ExpenseUiModel> {
+    ): List<HomeUiModel> {
         return expenses.map { expense ->
+            // Create the elements for the Ui
             // Find the category based on the ID
             val category =
                 categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
 
-            ExpenseUiModel(
+            HomeUiModel(
                 id = expense.id!!,
                 amount = "${expense.amount} $",
                 date = expense.date.toString(),

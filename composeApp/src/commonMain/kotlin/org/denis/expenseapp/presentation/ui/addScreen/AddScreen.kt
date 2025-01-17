@@ -34,6 +34,7 @@ import expenseapp.composeapp.generated.resources.add_screen_description
 import expenseapp.composeapp.generated.resources.add_screen_description_hint
 import expenseapp.composeapp.generated.resources.add_screen_error_empty_amount
 import expenseapp.composeapp.generated.resources.add_screen_save_button
+import expenseapp.composeapp.generated.resources.add_screen_success
 import expenseapp.composeapp.generated.resources.add_screen_title
 import expenseapp.composeapp.generated.resources.button_confirmation_basic
 import org.denis.expenseapp.presentation.common.BodyTextLarge
@@ -49,6 +50,7 @@ import org.denis.expenseapp.presentation.model.addScreen.AddExpenseUiAction
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseUiState
 import org.denis.expenseapp.presentation.model.addScreen.AddExpenseViewModel
 import org.denis.expenseapp.presentation.model.addScreen.CategoryUiModel
+import org.denis.expenseapp.presentation.model.homeScreen.HomeUiState
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -72,8 +74,7 @@ class AddScreen : Screen {
                 AddScreenBody(
                     uiState = uiState,
                     onAction = viewModel::onSaveIncomePressed,
-                    paddingValues = paddingValues,
-                    navigator = navigator
+                    paddingValues = paddingValues
                 )
             }
         )
@@ -83,8 +84,7 @@ class AddScreen : Screen {
     private fun AddScreenBody(
         uiState: AddExpenseUiState,
         onAction: (AddExpenseUiAction) -> Unit,
-        paddingValues: PaddingValues,
-        navigator: Navigator
+        paddingValues: PaddingValues
     ) {
         MainBodyStyle(
             paddingValues = paddingValues
@@ -95,10 +95,9 @@ class AddScreen : Screen {
                     uiState = uiState,
                     onAction = onAction
                 )
-
-                is AddExpenseUiState.RegisterCompleted -> {
-                    navigator.pop()
-                }
+                is AddExpenseUiState.RegisterCompleted -> SuccessState(
+                    onSuccess = { onAction(AddExpenseUiAction.SuccessConfirmation) }
+                )
 
                 is AddExpenseUiState.Error -> ErrorState(
                     onRetry = { onAction(AddExpenseUiAction.Retry) }
@@ -122,10 +121,35 @@ class AddScreen : Screen {
                 BodyTextLarge(
                     text = stringResource(Res.string.add_screen_error_empty_amount)
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 ButtonPrimary(
                     text = stringResource(Res.string.button_confirmation_basic),
                     onClick = onRetry,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+    }
+
+    @Composable
+    private fun SuccessState(onSuccess: () -> Unit) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                BodyTextLarge(
+                    text = stringResource(Res.string.add_screen_success)
+                )
+                Spacer(modifier = Modifier.height(32.dp))
+                ButtonPrimary(
+                    text = stringResource(Res.string.button_confirmation_basic),
+                    onClick = onSuccess,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -145,6 +169,7 @@ class AddScreen : Screen {
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
+                // Scrolleable view
                 LazyColumn(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(16.dp)

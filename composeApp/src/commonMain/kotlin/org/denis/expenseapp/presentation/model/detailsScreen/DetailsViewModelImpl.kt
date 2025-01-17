@@ -37,6 +37,7 @@ class DetailsViewModelImpl(
         expense: Expense,
         categoryList: List<ExpenseCategory>
     ): DetailsUiModel {
+        // Create the element for the Ui
         // Find the category based on the ID
         val category = categoryList.find { it.id.toLong() == expense.id } ?: ExpenseCategory.OTHER
 

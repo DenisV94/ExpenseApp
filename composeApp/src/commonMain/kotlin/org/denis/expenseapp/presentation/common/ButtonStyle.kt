@@ -32,10 +32,9 @@ fun ButtonPrimary(
             contentColor = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
         )
     ) {
-        Text(
+        BodyTextLarge(
             text = text,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

@@ -31,7 +31,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import expenseapp.composeapp.generated.resources.Res
-import expenseapp.composeapp.generated.resources.add_screen_date
 import expenseapp.composeapp.generated.resources.home_screen_error
 import expenseapp.composeapp.generated.resources.home_screen_my_expenses
 import expenseapp.composeapp.generated.resources.home_screen_no_expenses
@@ -39,11 +38,10 @@ import expenseapp.composeapp.generated.resources.home_screen_title
 import org.denis.expenseapp.presentation.common.BodyTextLarge
 import org.denis.expenseapp.presentation.common.BodyTextMedium
 import org.denis.expenseapp.presentation.common.BodyTextSmall
-import org.denis.expenseapp.presentation.common.ButtonPrimary
 import org.denis.expenseapp.presentation.common.LoadingState
 import org.denis.expenseapp.presentation.common.MainBodyStyle
 import org.denis.expenseapp.presentation.common.topBars.TopBarHome
-import org.denis.expenseapp.presentation.model.homeScreen.ExpenseUiModel
+import org.denis.expenseapp.presentation.model.homeScreen.HomeUiModel
 import org.denis.expenseapp.presentation.model.homeScreen.HomeUiState
 import org.denis.expenseapp.presentation.model.homeScreen.HomeViewModel
 import org.denis.expenseapp.presentation.ui.detailsScreen.DetailsScreen
@@ -83,7 +81,7 @@ data object HomeScreen : Screen {
     @Composable
     fun HomeScreenBody(
         uiState: HomeUiState,
-        onItemClick: (ExpenseUiModel) -> Unit,
+        onItemClick: (HomeUiModel) -> Unit,
         paddingValues: PaddingValues
     ) {
         MainBodyStyle(
@@ -108,7 +106,7 @@ data object HomeScreen : Screen {
     }
 
     @Composable
-    fun ExpenseList(expenses: List<ExpenseUiModel>, onItemClick: (ExpenseUiModel) -> Unit) {
+    fun ExpenseList(expenses: List<HomeUiModel>, onItemClick: (HomeUiModel) -> Unit) {
         Box(
             modifier = Modifier
                 .padding(top = 64.dp)
@@ -139,8 +137,8 @@ data object HomeScreen : Screen {
 
     @Composable
     fun ExpenseItem(
-        expense: ExpenseUiModel,
-        onClick: (ExpenseUiModel) -> Unit
+        expense: HomeUiModel,
+        onClick: (HomeUiModel) -> Unit
     ) {
         Row(
             modifier = Modifier

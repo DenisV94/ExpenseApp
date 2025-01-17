@@ -22,6 +22,7 @@ class AddExpenseViewModelImpl(
     }
 
     override fun onSaveIncomePressed(action: AddExpenseUiAction) {
+        // Ui Actions
         when (action) {
             is AddExpenseUiAction.UpdateDescription -> updateUiState { it.copy(description = action.description) }
             is AddExpenseUiAction.UpdateAmount -> updateUiState { it.copy(amount = action.amount) }
@@ -29,6 +30,7 @@ class AddExpenseViewModelImpl(
             is AddExpenseUiAction.SelectDate -> updateUiState { it.copy(date = action.date) }
             is AddExpenseUiAction.SaveExpense -> saveExpense()
             is AddExpenseUiAction.Retry -> loadInitialState()
+            is AddExpenseUiAction.SuccessConfirmation -> loadInitialState()
         }
     }
 
@@ -58,7 +60,7 @@ class AddExpenseViewModelImpl(
         }
 
         val expense = Expense(
-            id = 0, // Replace with proper ID logic
+            id = 0, // id is not used in this case
             description = currentState.description,
             amount = currentState.amount.toLong(),
             category = currentState.selectedCategory.id,

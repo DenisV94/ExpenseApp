@@ -17,7 +17,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
-
 @Composable
 fun TextEditField(
     value: String,
@@ -28,8 +27,8 @@ fun TextEditField(
     shape: Shape = MaterialTheme.shapes.medium,
     backgroundColors: TextFieldColors = TextFieldDefaults.colors(
         disabledContainerColor = MaterialTheme.colorScheme.surface,
-        unfocusedContainerColor = Color.Transparent,
-        focusedContainerColor = Color.Transparent
+        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+        focusedContainerColor = MaterialTheme.colorScheme.surface
     ),
     onImeAction: () -> Unit,
     fontColor: Color = MaterialTheme.colorScheme.onSurface,
@@ -64,7 +63,6 @@ fun TextEditField(
             onImeAction()
         }
         )
-
     )
 }
 
@@ -78,8 +76,8 @@ fun CurrencyInputField(
     shape: Shape = MaterialTheme.shapes.medium,
     backgroundColors: TextFieldColors = TextFieldDefaults.colors(
         disabledContainerColor = MaterialTheme.colorScheme.surface,
-        unfocusedContainerColor = Color.Transparent,
-        focusedContainerColor = Color.Transparent
+        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+        focusedContainerColor = MaterialTheme.colorScheme.surface
     ),
     onImeAction: () -> Unit,
     fontColor: Color = MaterialTheme.colorScheme.onSurface,
@@ -115,6 +113,5 @@ fun CurrencyInputField(
             onImeAction()
         })
     )
-
 }
 

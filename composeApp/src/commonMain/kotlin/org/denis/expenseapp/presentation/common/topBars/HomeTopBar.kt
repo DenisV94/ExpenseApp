@@ -16,10 +16,6 @@ import androidx.compose.ui.unit.dp
 import org.denis.expenseapp.presentation.common.TitleTextBold
 import org.denis.expenseapp.presentation.platform.getStatusBarHeightDp
 
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-
-
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun TopBarHome(
     title: String

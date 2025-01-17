@@ -11,9 +11,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import expenseapp.composeapp.generated.resources.Res
+import expenseapp.composeapp.generated.resources.app_name
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.denis.expenseapp.presentation.common.TitleTextBold
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SplashScreen(onTimeout: () -> Unit) {
@@ -22,7 +25,6 @@ fun SplashScreen(onTimeout: () -> Unit) {
 
     SplashScreenScreen()
 
-    // Simulate a loading process
     scope.launch {
         delay(splashScreenDuration)
         onTimeout()
@@ -39,16 +41,10 @@ private fun SplashScreenScreen() {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(109.dp)
+            verticalArrangement = Arrangement.Center
         ) {
-
-            /*val painter = painterResource(MR.)
-            Image(
-                painter = painter,
-                contentDescription = "images",
-            )*/
             TitleTextBold(
-                text = "Expense App",
+                text = stringResource(Res.string.app_name)
             )
         }
     }

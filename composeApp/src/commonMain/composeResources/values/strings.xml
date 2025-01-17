@@ -20,6 +20,7 @@
     <string name="add_screen_description_hint">Enter description</string>
     <string name="add_screen_amount_hint">Enter amount $</string>
     <string name="add_screen_error_empty_amount">Fill the amount field!</string>
+    <string name="add_screen_success">Successfully added!</string>
 
     <!--Details expense -->
     <string name="detials_screen_title">Details</string>

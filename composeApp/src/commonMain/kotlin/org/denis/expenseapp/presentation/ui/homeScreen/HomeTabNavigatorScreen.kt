@@ -40,7 +40,8 @@ class HomeTabNavigatorScreen : Screen {
 
     @Composable
     override fun Content() {
-        var isVisible by remember { mutableStateOf(true) } // Visibility state for the bottom navigation bar
+        // Visibility state for the bottom navigation bar
+        var isVisible by remember { mutableStateOf(true) }
         val navigator = LocalNavigator.currentOrThrow
         val homeTab = remember {
             HomeTab(onNavigator = { isVisible = it })
@@ -66,7 +67,7 @@ class HomeTabNavigatorScreen : Screen {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(bottom = 65.dp - getNavBarHeightDp().dp)
+                            .padding(bottom = 65.dp-getNavBarHeightDp().dp)
                     ) {
                         CurrentTab()
                     }
@@ -83,10 +84,10 @@ fun CustomNavigationBar(
 ) {
     NavigationBar(
         modifier = Modifier.height(64.dp),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor =MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
-        // Tab navigation items for HomeTab
+        // Tab navigation items
         TabNavigationItem(homeTab)
 
         // Custom navigation item for navigating to a new screen from navbar
@@ -123,10 +124,7 @@ private fun RowScope.CustomNavigationItem(onNavigate: () -> Unit) {
         selected = false,
         onClick = { onNavigate() },
         icon = {
-            Icon(
-                painterResource(Res.drawable.ic_plus),
-                contentDescription = "New Screen"
-            ) // Custom icon
+            Icon(painterResource(Res.drawable.ic_plus), contentDescription = "New Screen")
         }
     )
 }

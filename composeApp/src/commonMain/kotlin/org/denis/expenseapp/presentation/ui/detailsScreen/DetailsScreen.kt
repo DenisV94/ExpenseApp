@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import expenseapp.composeapp.generated.resources.Res
 import expenseapp.composeapp.generated.resources.add_screen_amount
@@ -27,6 +28,7 @@ import expenseapp.composeapp.generated.resources.detials_screen_category
 import expenseapp.composeapp.generated.resources.detials_screen_title
 import org.denis.expenseapp.presentation.common.BodyTextLarge
 import org.denis.expenseapp.presentation.common.BodyTextMedium
+import org.denis.expenseapp.presentation.common.LoadingState
 import org.denis.expenseapp.presentation.common.MainBodyStyle
 import org.denis.expenseapp.presentation.common.topBars.BackButtonTopBar
 import org.denis.expenseapp.presentation.model.detailsScreen.DetailsUiModel
@@ -60,7 +62,8 @@ data class DetailsScreen(val expenseId: Long) : Screen {
             content = { paddingValues ->
                 DetailsScreenBody(
                     uiState = uiState,
-                    paddingValues = paddingValues
+                    paddingValues = paddingValues,
+                    navigator = navigator
                 )
             }
         )
@@ -69,7 +72,8 @@ data class DetailsScreen(val expenseId: Long) : Screen {
     @Composable
     private fun DetailsScreenBody(
         uiState: DetailsUiState,
-        paddingValues: PaddingValues
+        paddingValues: PaddingValues,
+        navigator: Navigator
     ) {
         MainBodyStyle(
             paddingValues = paddingValues
@@ -79,8 +83,7 @@ data class DetailsScreen(val expenseId: Long) : Screen {
                 is DetailsUiState.Success -> ExpenseForm(
                     uiState = uiState.detailsExpense
                 )
-
-                is DetailsUiState.Error -> ErrorState()
+                is DetailsUiState.Error -> navigator.pop()
             }
         }
     }
@@ -121,20 +124,6 @@ data class DetailsScreen(val expenseId: Long) : Screen {
             // Description Field
             BodyTextLarge(text = stringResource(Res.string.add_screen_description))
             BodyTextMedium(uiState.description)
-        }
-    }
-
-    @Composable
-    private fun LoadingState() {
-        Box(modifier = Modifier.fillMaxWidth()) {
-
-        }
-    }
-
-    @Composable
-    private fun ErrorState() {
-        Box(modifier = Modifier.fillMaxWidth()) {
-
         }
     }
 

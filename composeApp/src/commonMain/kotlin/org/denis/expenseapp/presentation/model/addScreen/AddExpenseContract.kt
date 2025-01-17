@@ -23,5 +23,6 @@ sealed class AddExpenseUiAction {
     data class SelectCategory(val category: CategoryUiModel) : AddExpenseUiAction()
     data class SelectDate(val date: LocalDate) : AddExpenseUiAction()
     data object SaveExpense : AddExpenseUiAction()
-    data object Retry : AddExpenseUiAction()
+    data object Retry: AddExpenseUiAction()
+    data object SuccessConfirmation: AddExpenseUiAction()
 }

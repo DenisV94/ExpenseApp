@@ -8,7 +8,6 @@ sealed class EitherResult<out T> {
         data object NotFound : RepositoryError()
         data object InternalError : RepositoryError()
         data class ValidationError(val message: String) : RepositoryError()
-
     }
 
     // Local database-specific errors

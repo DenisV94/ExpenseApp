@@ -4,6 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
@@ -24,13 +25,15 @@ fun TitleTextBold(
 fun BodyTextLarge(
     text: String,
     modifier: Modifier = Modifier,
-    textAlign: TextAlign = TextAlign.Start
+    textAlign: TextAlign = TextAlign.Start,
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyLarge,
         modifier = modifier,
         textAlign = textAlign,
+        color = color
     )
 }
 

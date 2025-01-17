@@ -23,7 +23,6 @@ import org.denis.expenseapp.presentation.common.TitleTextBold
 import org.denis.expenseapp.presentation.platform.getStatusBarHeightDp
 import org.jetbrains.compose.resources.painterResource
 
-
 @Composable
 fun BackButtonTopBar(
     title: String,
@@ -63,7 +62,7 @@ fun BackButtonTopBar(
                 TitleTextBold(text = title)
             }
 
-            Spacer(modifier = Modifier.size(24.dp)) // Placeholder for spacing
+            Spacer(modifier = Modifier.size(24.dp))
         }
     }
 }
